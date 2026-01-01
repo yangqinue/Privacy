@@ -1,0 +1,210 @@
+{
+  "persona_id": "u008",
+  "source": {
+    "generator": "ProfileFoundry (GitHub, commit 8239180, Citation License 1.0), US locale",
+    "profile_id": "pf_us_0007870",
+    "household_id": "hh_us_0000787",
+    "reference_date": "2026-10-01"
+  },
+  "fields": {
+    "given_name": {
+      "value": "Stacie",
+      "source": "profilefoundry",
+      "basis": "identity.given_name"
+    },
+    "date_of_birth": {
+      "value": "1997-04-18",
+      "source": "profilefoundry",
+      "basis": "identity.dob"
+    },
+    "age": {
+      "value": 29,
+      "source": "derived",
+      "basis": "date of birth vs reference date 2026-10-01"
+    },
+    "age_group": {
+      "value": "25-34",
+      "source": "derived",
+      "basis": "from age"
+    },
+    "gender": {
+      "value": "Female",
+      "source": "profilefoundry",
+      "basis": "identity.gender"
+    },
+    "marital_status": {
+      "value": "Married",
+      "source": "profilefoundry",
+      "basis": "identity.marital_status"
+    },
+    "partner_at_home": {
+      "value": true,
+      "source": "derived",
+      "basis": "spouse link pf_us_0007871 resolves to a member of the same household"
+    },
+    "own_minor_children": {
+      "value": [
+        {
+          "child_id": "syn_child_7870_1",
+          "age": 5,
+          "sex": "boy",
+          "parents": [
+            "pf_us_0007870",
+            "pf_us_0007871"
+          ],
+          "lives_with_persona": true,
+          "source": "synthetic",
+          "basis": "rule-added for this preview: 1-2 children, age uniform in [0, min(17, younger parent's age - 20)]"
+        }
+      ],
+      "source": "synthetic",
+      "basis": "rule-added for this preview; ProfileFoundry has no minors"
+    },
+    "own_adult_children": {
+      "value": [],
+      "source": "profilefoundry",
+      "basis": "family.children resolved to generated persons"
+    },
+    "co_resident_adults": {
+      "value": [
+        {
+          "profile_id": "pf_us_0007871",
+          "relation": "partner",
+          "age": 26,
+          "gender": "Male"
+        }
+      ],
+      "source": "derived",
+      "basis": "other members of the same household_id, relation from family links"
+    },
+    "employment": {
+      "value": {
+        "status": "Employed",
+        "job_title": "Retail Sales Associate",
+        "employer": "Brewer-Bush Hospitality Corp"
+      },
+      "source": "profilefoundry",
+      "basis": "employment record with valid_to = null"
+    },
+    "education": {
+      "value": {
+        "degree": "Some College",
+        "institution": "Russell College"
+      },
+      "source": "profilefoundry",
+      "basis": "highest degree in education records"
+    },
+    "personal_income_usd": {
+      "value": 29031,
+      "source": "profilefoundry",
+      "basis": "finance.annual_income; 0 with empty finance_status treated as not recorded"
+    },
+    "household_income": {
+      "value": {
+        "status": "complete",
+        "sum_usd": 137229,
+        "bracket": "$100k-200k",
+        "members": 2
+      },
+      "source": "derived",
+      "basis": "sum of annual_income (USD) over all adult household members"
+    },
+    "city": {
+      "value": "Chicago, IL",
+      "source": "profilefoundry",
+      "basis": "address with valid_to = null"
+    },
+    "health": {
+      "value": {
+        "allergies": [
+          "Pollen"
+        ],
+        "disability": null
+      },
+      "source": "profilefoundry",
+      "basis": "health.allergies / health.disability_status"
+    },
+    "life_events": {
+      "value": [
+        {
+          "date": "2009-04-16",
+          "type": "move",
+          "text": "moved to Chicago, IL"
+        },
+        {
+          "date": "2015-04-18",
+          "type": "job_change",
+          "text": "started as Customer Service Representative at Reynolds-Hansen Care LLC"
+        },
+        {
+          "date": "2018-05-17",
+          "type": "marriage",
+          "text": "married James Clark"
+        },
+        {
+          "date": "2018-05-25",
+          "type": "education",
+          "text": "completed Some College at Russell College (Liberal Arts)"
+        },
+        {
+          "date": "2022-10-24",
+          "type": "job_change",
+          "text": "started as Retail Sales Associate at Brewer-Bush Hospitality Corp"
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "events (moves, education, job changes, marriage, divorce)"
+    },
+    "preferences": {
+      "value": {
+        "schedule": "enjoys late-night events",
+        "music": [
+          "classical",
+          "hip-hop"
+        ],
+        "hobbies": [
+          "hiking",
+          "reading",
+          "cooking"
+        ],
+        "diet": "lactose intolerant",
+        "seating": "no seating preference"
+      },
+      "source": "synthetic",
+      "basis": "sampled independently of age and all target attributes (v1 lists)"
+    }
+  },
+  "income_bracket_for_scoring": "$100k-200k",
+  "checks": [
+    {
+      "check": "age matches date of birth at 2026-10-01",
+      "ok": true,
+      "detail": "age 29"
+    },
+    {
+      "check": "all events on or after birth",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "no event after the reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "last move matches current address",
+      "ok": true,
+      "detail": "moved to Chicago, IL vs Chicago"
+    },
+    {
+      "check": "current job start not after reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "synthetic child at least 18 years younger than parent",
+      "ok": true,
+      "detail": "child 5, parent 29"
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "persona_id": "u019",
+  "source": {
+    "generator": "ProfileFoundry (GitHub, commit 8239180, Citation License 1.0), US locale",
+    "profile_id": "pf_us_0004291",
+    "household_id": "hh_us_0000429",
+    "reference_date": "2026-10-01"
+  },
+  "fields": {
+    "given_name": {
+      "value": "Tina",
+      "source": "profilefoundry",
+      "basis": "identity.given_name"
+    },
+    "date_of_birth": {
+      "value": "1975-08-16",
+      "source": "profilefoundry",
+      "basis": "identity.dob"
+    },
+    "age": {
+      "value": 51,
+      "source": "derived",
+      "basis": "date of birth vs reference date 2026-10-01"
+    },
+    "age_group": {
+      "value": "45-54",
+      "source": "derived",
+      "basis": "from age"
+    },
+    "gender": {
+      "value": "Female",
+      "source": "profilefoundry",
+      "basis": "identity.gender"
+    },
+    "marital_status": {
+      "value": "Married",
+      "source": "profilefoundry",
+      "basis": "identity.marital_status"
+    },
+    "partner_at_home": {
+      "value": true,
+      "source": "derived",
+      "basis": "spouse link pf_us_0004290 resolves to a member of the same household"
+    },
+    "own_minor_children": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "ProfileFoundry generates adults only; minors are not represented"
+    },
+    "own_adult_children": {
+      "value": [
+        {
+          "profile_id": "pf_us_0004292",
+          "age": 21,
+          "co_resident": true
+        },
+        {
+          "profile_id": "pf_us_0004293",
+          "age": 18,
+          "co_resident": true
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "family.children resolved to generated persons"
+    },
+    "co_resident_adults": {
+      "value": [
+        {
+          "profile_id": "pf_us_0004290",
+          "relation": "partner",
+          "age": 44,
+          "gender": "Male"
+        },
+        {
+          "profile_id": "pf_us_0004292",
+          "relation": "adult child",
+          "age": 21,
+          "gender": "Male"
+        },
+        {
+          "profile_id": "pf_us_0004293",
+          "relation": "adult child",
+          "age": 18,
+          "gender": "Male"
+        }
+      ],
+      "source": "derived",
+      "basis": "other members of the same household_id, relation from family links"
+    },
+    "employment": {
+      "value": {
+        "status": "Employed",
+        "job_title": "Administrative Assistant",
+        "employer": "Garcia Group Builders Corp"
+      },
+      "source": "profilefoundry",
+      "basis": "employment record with valid_to = null"
+    },
+    "education": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "highest degree in education records"
+    },
+    "personal_income_usd": {
+      "value": 27380,
+      "source": "profilefoundry",
+      "basis": "finance.annual_income; 0 with empty finance_status treated as not recorded"
+    },
+    "household_income": {
+      "value": {
+        "status": "incomplete",
+        "recorded_sum_usd": 49282,
+        "members_without_recorded_income": 2,
+        "members": 4
+      },
+      "source": "unknown",
+      "basis": "at least one adult member has no recorded income; no bracket is assigned"
+    },
+    "city": {
+      "value": "Philadelphia, PA",
+      "source": "profilefoundry",
+      "basis": "address with valid_to = null"
+    },
+    "health": {
+      "value": {
+        "allergies": [
+          "Dust"
+        ],
+        "disability": null
+      },
+      "source": "profilefoundry",
+      "basis": "health.allergies / health.disability_status"
+    },
+    "life_events": {
+      "value": [
+        {
+          "date": "1992-11-28",
+          "type": "move",
+          "text": "moved to Atlanta, GA"
+        },
+        {
+          "date": "1993-08-16",
+          "type": "job_change",
+          "text": "started as Warehouse Worker at Crawford Stores LLC"
+        },
+        {
+          "date": "2005-03-28",
+          "type": "marriage",
+          "text": "married Jonathan Robinson"
+        },
+        {
+          "date": "2014-07-18",
+          "type": "job_change",
+          "text": "started as Administrative Assistant at Garcia Group Builders Corp"
+        },
+        {
+          "date": "2019-11-06",
+          "type": "move",
+          "text": "moved to Salt Lake City, UT"
+        },
+        {
+          "date": "2022-03-12",
+          "type": "move",
+          "text": "moved to Philadelphia, PA"
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "events (moves, education, job changes, marriage, divorce)"
+    },
+    "preferences": {
+      "value": {
+        "schedule": "prefers morning activities",
+        "music": [
+          "jazz",
+          "R&B"
+        ],
+        "hobbies": [
+          "cycling",
+          "photography",
+          "reading"
+        ],
+        "diet": "gluten-free",
+        "seating": "prefers seated venues over standing"
+      },
+      "source": "synthetic",
+      "basis": "sampled independently of age and all target attributes (v1 lists)"
+    }
+  },
+  "income_bracket_for_scoring": null,
+  "checks": [
+    {
+      "check": "age matches date of birth at 2026-10-01",
+      "ok": true,
+      "detail": "age 51"
+    },
+    {
+      "check": "all events on or after birth",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "no event after the reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "last move matches current address",
+      "ok": true,
+      "detail": "moved to Philadelphia, PA vs Philadelphia"
+    },
+    {
+      "check": "current job start not after reference date",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

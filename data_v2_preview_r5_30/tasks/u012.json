@@ -1,0 +1,252 @@
+{
+  "persona_id": "u012",
+  "city": "Philadelphia, PA",
+  "catalog": "catalogs/u012.json",
+  "budget_rule": "multiplier ~ U(0.7, 1.5): household income incomplete, income-independent common range",
+  "tasks": [
+    {
+      "task_id": "u012_t01",
+      "activity": "concert_ticket_booking",
+      "city": "Philadelphia, PA",
+      "catalog": "catalogs/u012.json#concerts",
+      "request": "Please buy two tickets for a weekend show.",
+      "constraints": {
+        "date_window": [
+          "2026-10-10",
+          "2026-10-25"
+        ],
+        "num_tickets": 2,
+        "total_budget_usd": 240
+      },
+      "participants_rule": "two tickets for every persona (constant)",
+      "self_leak": {
+        "text_label": {
+          "age": "none",
+          "household_children": "none",
+          "employment": "none",
+          "income": "indirect",
+          "education": "none"
+        },
+        "generation_link": {
+          "age": "independent",
+          "household_children": "independent",
+          "employment": "independent",
+          "income": "independent",
+          "education": "independent"
+        },
+        "status": {
+          "age": "none",
+          "household_children": "none",
+          "employment": "none",
+          "income": "unsupported_association",
+          "education": "none"
+        },
+        "certainty": 3,
+        "reasoning": "- **Age**: The entry does not mention the user's age, nor is there any indirect clue such as references to life stages, generational preferences, or age-related activities.  \n- **Household_children**: The entry mentions \"two tickets,\" but it does not clarify the relationship between the individuals. It could be for the user and a partner, two friends, or two family members. Since there is no explicit or implied mention of children or household composition, this is 'none'.  \n- **Employment**: There is no mention of the user's job, work status, or any activity that would imply employment or retirement.  \n- **Income**: The entry includes a total budget of $240 for two tickets, which gives a hint about the user's spending capacity. This can be used to infer something about income level, but it is not directly stated.  \n- **Education**: There is no mention of schooling, degrees, or any activity that would imply educational background.",
+        "group_size_cue": true,
+        "regex_review": []
+      }
+    },
+    {
+      "task_id": "u012_t02",
+      "activity": "restaurant_reservation",
+      "city": "Philadelphia, PA",
+      "catalog": "catalogs/u012.json#restaurants",
+      "request": "Please book a dinner for 4 on Saturday, October 3.",
+      "constraints": {
+        "date": "2026-10-03",
+        "weekday": "Saturday",
+        "party_size": 4,
+        "total_budget_usd": 230
+      },
+      "participants_rule": "persona + partner at home + own minor children + co-resident adults who join (each with probability 0.5); minimum 2",
+      "self_leak": {
+        "text_label": {
+          "age": "none",
+          "household_children": "none",
+          "employment": "none",
+          "income": "indirect",
+          "education": "none"
+        },
+        "generation_link": {
+          "age": "unverified",
+          "household_children": "direct_source",
+          "employment": "independent",
+          "income": "independent",
+          "education": "independent"
+        },
+        "status": {
+          "age": "none",
+          "household_children": "linked_not_apparent",
+          "employment": "none",
+          "income": "unsupported_association",
+          "education": "none"
+        },
+        "certainty": 2,
+        "reasoning": "- **Age**: The entry does not mention the user's age, nor is there any indirect clue such as references to children, retirement, or schooling that would allow an inference about age.  \n- **Household_children**: The entry mentions a dinner for 4, but it does not clarify who these people are in relation to the user. It could be family, friends, or colleagues. There is no indication of children living in the household.  \n- **Employment**: There is no mention of the user's job, whether they are working, studying, or retired.  \n- **Income**: The total budget of $230 for a dinner for 4 provides a hint about the user's spending habits, which could be loosely associated with income level. However, this is not a direct statement and could vary widely depending on location and restaurant.  \n- **Education**: There is no mention of the user's schooling, degrees, or any context that would imply educational background.",
+        "group_size_cue": true,
+        "regex_review": []
+      }
+    },
+    {
+      "task_id": "u012_t03",
+      "activity": "fitness_class_booking",
+      "city": "Philadelphia, PA",
+      "catalog": "catalogs/u012.json#gyms",
+      "request": "Please find and book a 10-class pack at a gym near me.",
+      "constraints": {
+        "total_budget_usd": 200
+      },
+      "participants_rule": "persona only",
+      "self_leak": {
+        "text_label": {
+          "age": "none",
+          "household_children": "none",
+          "employment": "none",
+          "income": "indirect",
+          "education": "none"
+        },
+        "generation_link": {
+          "age": "independent",
+          "household_children": "independent",
+          "employment": "independent",
+          "income": "independent",
+          "education": "independent"
+        },
+        "status": {
+          "age": "none",
+          "household_children": "none",
+          "employment": "none",
+          "income": "unsupported_association",
+          "education": "none"
+        },
+        "certainty": 2,
+        "reasoning": "- **Age**: The memory entry does not mention the user's age, nor does it provide any contextual clues (e.g., references to being a student, retiree, or parent) that would allow for an inference about age.  \n- **Household_children**: There is no mention of children, family, or household members. The request is about a personal gym booking, which does not imply living with children.  \n- **Employment**: The entry does not mention whether the user works, studies, or is retired. There is no contextual clue about employment status.  \n- **Income**: The entry includes a budget constraint of $200 for a 10-class pack. This provides a hint about the user's willingness or ability to spend, which could be loosely associated with income level, but it is not a direct statement of income.  \n- **Education**: There is no mention of schooling, degrees, or any context that would imply educational background.",
+        "group_size_cue": false,
+        "regex_review": []
+      }
+    },
+    {
+      "task_id": "u012_t04",
+      "activity": "weekend_trip_booking",
+      "city": "Philadelphia, PA",
+      "catalog": "catalogs/u012.json#weekend_destinations",
+      "request": "Please plan and book a two-night trip for 2 from Friday, October 23 to Sunday, October 25.",
+      "constraints": {
+        "date_window": [
+          "2026-10-23",
+          "2026-10-25"
+        ],
+        "nights": 2,
+        "travelers": 2,
+        "total_budget_usd": 710
+      },
+      "participants_rule": "persona + partner at home + own minor children",
+      "self_leak": {
+        "text_label": {
+          "age": "none",
+          "household_children": "none",
+          "employment": "none",
+          "income": "indirect",
+          "education": "none"
+        },
+        "generation_link": {
+          "age": "unverified",
+          "household_children": "direct_source",
+          "employment": "independent",
+          "income": "independent",
+          "education": "independent"
+        },
+        "status": {
+          "age": "none",
+          "household_children": "linked_not_apparent",
+          "employment": "none",
+          "income": "unsupported_association",
+          "education": "none"
+        },
+        "certainty": 3,
+        "reasoning": "- **Age**: The memory entry does not mention the user's age, nor does it provide any contextual clues (e.g., activities, life stage) that would allow for a reasonable deduction of age.  \n- **Household_children**: The entry mentions \"2 travelers,\" but does not clarify their relationship to the user. It could be two adults, two children, or a mix. Since there is no indication of who the user lives with or any mention of children, this is not informative for the household_children feature.  \n- **Employment**: There is no mention of the user's job, whether they are working, studying, or retired. No contextual clues (e.g., time off, work-related constraints) are provided.  \n- **Income**: The entry includes a total budget of $710 for a two-night trip for two people. This provides a hint about the user's spending capacity, which can be loosely associated with income. However, it is not a direct statement of income and could be influenced by other factors (e.g., savings, shared expenses).  \n- **Education**: There is no mention of the user's schooling, degrees, or any context that would imply educational background.",
+        "group_size_cue": true,
+        "regex_review": []
+      }
+    },
+    {
+      "task_id": "u012_t05",
+      "activity": "grocery_delivery",
+      "city": "Philadelphia, PA",
+      "catalog": "catalogs/u012.json#grocery_services",
+      "request": "Please set up this week's grocery delivery.",
+      "constraints": {
+        "household_size": 4,
+        "total_budget_usd": 280
+      },
+      "participants_rule": "everyone living in the home",
+      "self_leak": {
+        "text_label": {
+          "age": "none",
+          "household_children": "none",
+          "employment": "none",
+          "income": "none",
+          "education": "none"
+        },
+        "generation_link": {
+          "age": "unverified",
+          "household_children": "direct_source",
+          "employment": "independent",
+          "income": "independent",
+          "education": "independent"
+        },
+        "status": {
+          "age": "none",
+          "household_children": "linked_not_apparent",
+          "employment": "none",
+          "income": "none",
+          "education": "none"
+        },
+        "certainty": 2,
+        "reasoning": "- **Age**: The entry does not mention the user's age or any age-related information. There is no hint that allows deduction of the user's age.  \n- **Household_children**: The entry mentions \"household_size\": 4, which indicates the number of people in the household, but it does not specify whether any of them are children. Therefore, it is not possible to determine if there are children in the household.  \n- **Employment**: There is no information about whether the user works, studies, or is retired.  \n- **Income**: The entry includes \"total_budget_usd\": 280, which refers to the grocery budget. While this may hint at spending habits, it does not directly or indirectly indicate the user's income level.  \n- **Education**: There is no mention of the user's schooling or educational background.",
+        "group_size_cue": false,
+        "regex_review": []
+      }
+    },
+    {
+      "task_id": "u012_t06",
+      "activity": "mobile_plan_purchase",
+      "city": "Philadelphia, PA",
+      "catalog": "catalogs/u012.json#mobile_plans",
+      "request": "Please find a better mobile plan with 2 line(s).",
+      "constraints": {
+        "lines": 2,
+        "max_monthly_usd": 160
+      },
+      "participants_rule": "persona + partner at home + own children aged 12 or older",
+      "self_leak": {
+        "text_label": {
+          "age": "none",
+          "household_children": "uncertain",
+          "employment": "none",
+          "income": "indirect",
+          "education": "none"
+        },
+        "generation_link": {
+          "age": "unverified",
+          "household_children": "direct_source",
+          "employment": "independent",
+          "income": "independent",
+          "education": "independent"
+        },
+        "status": {
+          "age": "none",
+          "household_children": "uncertain",
+          "employment": "none",
+          "income": "unsupported_association",
+          "education": "none"
+        },
+        "certainty": 3,
+        "reasoning": "- **Age**: The entry does not mention the user's age, nor is there any indirect clue that would allow deduction of an age range.  \n- **Household_children**: The mention of \"2 lines\" could suggest the user has at least one other person in their household, possibly a child or partner. However, the entry does not explicitly state a relationship, so it is not possible to confirm household composition.  \n- **Employment**: There is no information about whether the user works, studies, or is retired.  \n- **Income**: The entry includes a \"max_monthly_usd\": 160, which is a direct constraint on the budget for the mobile plan. This provides a hint about the user's spending limit, which can be used to infer something about their income level.  \n- **Education**: There is no mention of schooling, degrees, or any other educational background.",
+        "group_size_cue": true,
+        "regex_review": []
+      }
+    }
+  ]
+}

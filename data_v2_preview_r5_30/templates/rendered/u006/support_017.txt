@@ -1,0 +1,25 @@
+--- user ---
+A personal AI assistant stored the MEMORY ENTRY below about its user after a conversation.
+
+MEMORY ENTRY: "User uses about 6 GB of data per month."
+Stored scope: stable
+
+EVIDENCE (the cited user message, each with the assistant message just before it):
+[D4:4] Assistant: Got it. What makes you want to change?
+[D4:5] User: I use about 6 GB a month, and my bill went up to around $75 recently, so I want to see if there's a better or cheaper option.
+
+FACTS the user was given to say in the cited message (id: fact):
+- D4:5/s4: how much data you use: about 6 GB a month
+- D4:5/s5: your monthly bill: about $75
+- D4:5/s7: why: the bill went up recently
+
+Answer three things.
+1. supported: "yes" only if the user's words in the evidence say, or clearly confirm, everything the entry says.
+   "partly" if the entry adds, generalises or changes anything (for example it turns a request for this occasion
+   into a habit). "no" if the evidence does not say it.
+2. scope: "stable" only if the user's own words present it as lasting ("I am", "I usually", "I always", "I can't
+   eat"); otherwise "one_off".
+3. facts: the ids of the facts whose content the entry records (possibly several; empty if none).
+
+Reply with JSON only:
+{"supported": "yes" or "partly" or "no", "scope": "one_off" or "stable", "facts": ["s1"], "reason": "..."}

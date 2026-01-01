@@ -1,0 +1,183 @@
+{
+  "persona_id": "u024",
+  "source": {
+    "generator": "ProfileFoundry (GitHub, commit 8239180, Citation License 1.0), US locale",
+    "profile_id": "pf_us_0006781",
+    "household_id": "hh_us_0000678",
+    "reference_date": "2026-10-01"
+  },
+  "fields": {
+    "given_name": {
+      "value": "Robert",
+      "source": "profilefoundry",
+      "basis": "identity.given_name"
+    },
+    "date_of_birth": {
+      "value": "1953-08-24",
+      "source": "profilefoundry",
+      "basis": "identity.dob"
+    },
+    "age": {
+      "value": 73,
+      "source": "derived",
+      "basis": "date of birth vs reference date 2026-10-01"
+    },
+    "age_group": {
+      "value": "65+",
+      "source": "derived",
+      "basis": "from age"
+    },
+    "gender": {
+      "value": "Male",
+      "source": "profilefoundry",
+      "basis": "identity.gender"
+    },
+    "marital_status": {
+      "value": "Married",
+      "source": "profilefoundry",
+      "basis": "identity.marital_status"
+    },
+    "partner_at_home": {
+      "value": true,
+      "source": "derived",
+      "basis": "spouse link pf_us_0006780 resolves to a member of the same household"
+    },
+    "own_minor_children": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "ProfileFoundry generates adults only; minors are not represented"
+    },
+    "own_adult_children": {
+      "value": [],
+      "source": "profilefoundry",
+      "basis": "family.children resolved to generated persons"
+    },
+    "co_resident_adults": {
+      "value": [
+        {
+          "profile_id": "pf_us_0006780",
+          "relation": "partner",
+          "age": 70,
+          "gender": "Female"
+        }
+      ],
+      "source": "derived",
+      "basis": "other members of the same household_id, relation from family links"
+    },
+    "employment": {
+      "value": {
+        "status": "unknown"
+      },
+      "source": "unknown",
+      "basis": "no current job record; retired/student/unemployed cannot be told apart"
+    },
+    "education": {
+      "value": {
+        "degree": "Bachelor",
+        "institution": "Gomez University"
+      },
+      "source": "profilefoundry",
+      "basis": "highest degree in education records"
+    },
+    "personal_income_usd": {
+      "value": 36452,
+      "source": "profilefoundry",
+      "basis": "finance.annual_income; 0 with empty finance_status treated as not recorded"
+    },
+    "household_income": {
+      "value": {
+        "status": "complete",
+        "sum_usd": 106187,
+        "bracket": "$100k-200k",
+        "members": 2
+      },
+      "source": "derived",
+      "basis": "sum of annual_income (USD) over all adult household members"
+    },
+    "city": {
+      "value": "New York, NY",
+      "source": "profilefoundry",
+      "basis": "address with valid_to = null"
+    },
+    "health": {
+      "value": {
+        "allergies": [],
+        "disability": null
+      },
+      "source": "profilefoundry",
+      "basis": "health.allergies / health.disability_status"
+    },
+    "life_events": {
+      "value": [
+        {
+          "date": "1980-05-23",
+          "type": "education",
+          "text": "completed Bachelor at Gomez University (Accounting)"
+        },
+        {
+          "date": "2000-06-01",
+          "type": "move",
+          "text": "moved to Manchester, NH"
+        },
+        {
+          "date": "2017-04-20",
+          "type": "move",
+          "text": "moved to New York, NY"
+        },
+        {
+          "date": "2019-07-28",
+          "type": "marriage",
+          "text": "married Lisa Cordova"
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "events (moves, education, job changes, marriage, divorce)"
+    },
+    "preferences": {
+      "value": {
+        "schedule": "prefers evening events",
+        "music": [
+          "R&B",
+          "classic rock"
+        ],
+        "hobbies": [
+          "gardening",
+          "hiking",
+          "yoga"
+        ],
+        "diet": "no restrictions",
+        "seating": "prefers seated venues over standing"
+      },
+      "source": "synthetic",
+      "basis": "sampled independently of age and all target attributes (v1 lists)"
+    }
+  },
+  "income_bracket_for_scoring": "$100k-200k",
+  "checks": [
+    {
+      "check": "age matches date of birth at 2026-10-01",
+      "ok": true,
+      "detail": "age 73"
+    },
+    {
+      "check": "all events on or after birth",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "no event after the reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "last move matches current address",
+      "ok": true,
+      "detail": "moved to New York, NY vs New York"
+    },
+    {
+      "check": "current job start not after reference date",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

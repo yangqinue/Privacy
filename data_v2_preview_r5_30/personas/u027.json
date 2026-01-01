@@ -1,0 +1,210 @@
+{
+  "persona_id": "u027",
+  "source": {
+    "generator": "ProfileFoundry (GitHub, commit 8239180, Citation License 1.0), US locale",
+    "profile_id": "pf_us_0004190",
+    "household_id": "hh_us_0000419",
+    "reference_date": "2026-10-01"
+  },
+  "fields": {
+    "given_name": {
+      "value": "Kenneth",
+      "source": "profilefoundry",
+      "basis": "identity.given_name"
+    },
+    "date_of_birth": {
+      "value": "1969-10-02",
+      "source": "profilefoundry",
+      "basis": "identity.dob"
+    },
+    "age": {
+      "value": 56,
+      "source": "derived",
+      "basis": "date of birth vs reference date 2026-10-01"
+    },
+    "age_group": {
+      "value": "55-64",
+      "source": "derived",
+      "basis": "from age"
+    },
+    "gender": {
+      "value": "Male",
+      "source": "profilefoundry",
+      "basis": "identity.gender"
+    },
+    "marital_status": {
+      "value": "Married",
+      "source": "profilefoundry",
+      "basis": "identity.marital_status"
+    },
+    "partner_at_home": {
+      "value": true,
+      "source": "derived",
+      "basis": "spouse link pf_us_0004191 resolves to a member of the same household"
+    },
+    "own_minor_children": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "ProfileFoundry generates adults only; minors are not represented"
+    },
+    "own_adult_children": {
+      "value": [
+        {
+          "profile_id": "pf_us_0004193",
+          "age": 27,
+          "co_resident": true
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "family.children resolved to generated persons"
+    },
+    "co_resident_adults": {
+      "value": [
+        {
+          "profile_id": "pf_us_0004191",
+          "relation": "partner",
+          "age": 50,
+          "gender": "Female"
+        },
+        {
+          "profile_id": "pf_us_0004192",
+          "relation": "parent",
+          "age": 79,
+          "gender": "Male"
+        },
+        {
+          "profile_id": "pf_us_0004193",
+          "relation": "adult child",
+          "age": 27,
+          "gender": "Female"
+        }
+      ],
+      "source": "derived",
+      "basis": "other members of the same household_id, relation from family links"
+    },
+    "employment": {
+      "value": {
+        "status": "Employed",
+        "job_title": "Carpenter",
+        "employer": "Crane Foods LLC"
+      },
+      "source": "profilefoundry",
+      "basis": "employment record with valid_to = null"
+    },
+    "education": {
+      "value": {
+        "degree": "Some College",
+        "institution": "Austin Polytechnic"
+      },
+      "source": "profilefoundry",
+      "basis": "highest degree in education records"
+    },
+    "personal_income_usd": {
+      "value": 62827,
+      "source": "profilefoundry",
+      "basis": "finance.annual_income; 0 with empty finance_status treated as not recorded"
+    },
+    "household_income": {
+      "value": {
+        "status": "incomplete",
+        "recorded_sum_usd": 163360,
+        "members_without_recorded_income": 1,
+        "members": 4
+      },
+      "source": "unknown",
+      "basis": "at least one adult member has no recorded income; no bracket is assigned"
+    },
+    "city": {
+      "value": "New York, NY",
+      "source": "profilefoundry",
+      "basis": "address with valid_to = null"
+    },
+    "health": {
+      "value": {
+        "allergies": [
+          "Latex"
+        ],
+        "disability": null
+      },
+      "source": "profilefoundry",
+      "basis": "health.allergies / health.disability_status"
+    },
+    "life_events": {
+      "value": [
+        {
+          "date": "1986-11-23",
+          "type": "move",
+          "text": "moved to Fort Worth, TX"
+        },
+        {
+          "date": "1989-05-05",
+          "type": "education",
+          "text": "completed Some College at Austin Polytechnic (Carpentry)"
+        },
+        {
+          "date": "1997-02-02",
+          "type": "marriage",
+          "text": "married Teresa Phelps"
+        },
+        {
+          "date": "2013-01-03",
+          "type": "move",
+          "text": "moved to New York, NY"
+        },
+        {
+          "date": "2023-03-18",
+          "type": "job_change",
+          "text": "started as Carpenter at Crane Foods LLC"
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "events (moves, education, job changes, marriage, divorce)"
+    },
+    "preferences": {
+      "value": {
+        "schedule": "enjoys late-night events",
+        "music": [
+          "country",
+          "pop-punk"
+        ],
+        "hobbies": [
+          "photography",
+          "running",
+          "knitting"
+        ],
+        "diet": "vegetarian",
+        "seating": "no seating preference"
+      },
+      "source": "synthetic",
+      "basis": "sampled independently of age and all target attributes (v1 lists)"
+    }
+  },
+  "income_bracket_for_scoring": null,
+  "checks": [
+    {
+      "check": "age matches date of birth at 2026-10-01",
+      "ok": true,
+      "detail": "age 56"
+    },
+    {
+      "check": "all events on or after birth",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "no event after the reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "last move matches current address",
+      "ok": true,
+      "detail": "moved to New York, NY vs New York"
+    },
+    {
+      "check": "current job start not after reference date",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

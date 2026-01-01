@@ -1,0 +1,219 @@
+{
+  "persona_id": "u023",
+  "source": {
+    "generator": "ProfileFoundry (GitHub, commit 8239180, Citation License 1.0), US locale",
+    "profile_id": "pf_us_0004263",
+    "household_id": "hh_us_0000426",
+    "reference_date": "2026-10-01"
+  },
+  "fields": {
+    "given_name": {
+      "value": "Deborah",
+      "source": "profilefoundry",
+      "basis": "identity.given_name"
+    },
+    "date_of_birth": {
+      "value": "1971-04-26",
+      "source": "profilefoundry",
+      "basis": "identity.dob"
+    },
+    "age": {
+      "value": 55,
+      "source": "derived",
+      "basis": "date of birth vs reference date 2026-10-01"
+    },
+    "age_group": {
+      "value": "55-64",
+      "source": "derived",
+      "basis": "from age"
+    },
+    "gender": {
+      "value": "Female",
+      "source": "profilefoundry",
+      "basis": "identity.gender"
+    },
+    "marital_status": {
+      "value": "Married",
+      "source": "profilefoundry",
+      "basis": "identity.marital_status"
+    },
+    "partner_at_home": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "spouse link external is not among generated household members"
+    },
+    "own_minor_children": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "ProfileFoundry generates adults only; minors are not represented"
+    },
+    "own_adult_children": {
+      "value": [],
+      "source": "profilefoundry",
+      "basis": "family.children resolved to generated persons"
+    },
+    "co_resident_adults": {
+      "value": [
+        {
+          "profile_id": "pf_us_0004260",
+          "relation": "other adult (relation not recorded)",
+          "age": 55,
+          "gender": "Female"
+        },
+        {
+          "profile_id": "pf_us_0004261",
+          "relation": "other adult (relation not recorded)",
+          "age": 30,
+          "gender": "Male"
+        },
+        {
+          "profile_id": "pf_us_0004262",
+          "relation": "other adult (relation not recorded)",
+          "age": 21,
+          "gender": "Male"
+        }
+      ],
+      "source": "derived",
+      "basis": "other members of the same household_id, relation from family links"
+    },
+    "employment": {
+      "value": {
+        "status": "Employed",
+        "job_title": "Real Estate Agent",
+        "employer": "Valencia-Owens Consulting"
+      },
+      "source": "profilefoundry",
+      "basis": "employment record with valid_to = null"
+    },
+    "education": {
+      "value": {
+        "degree": "Bachelor",
+        "institution": "Petersen University"
+      },
+      "source": "profilefoundry",
+      "basis": "highest degree in education records"
+    },
+    "personal_income_usd": {
+      "value": 67660,
+      "source": "profilefoundry",
+      "basis": "finance.annual_income; 0 with empty finance_status treated as not recorded"
+    },
+    "household_income": {
+      "value": {
+        "status": "complete",
+        "sum_usd": 198780,
+        "bracket": "$100k-200k",
+        "members": 4
+      },
+      "source": "derived",
+      "basis": "sum of annual_income (USD) over all adult household members"
+    },
+    "city": {
+      "value": "Tampa, FL",
+      "source": "profilefoundry",
+      "basis": "address with valid_to = null"
+    },
+    "health": {
+      "value": {
+        "allergies": [
+          "Dust"
+        ],
+        "disability": null
+      },
+      "source": "profilefoundry",
+      "basis": "health.allergies / health.disability_status"
+    },
+    "life_events": {
+      "value": [
+        {
+          "date": "1988-04-06",
+          "type": "move",
+          "text": "moved to Wilmington, DE"
+        },
+        {
+          "date": "1989-12-21",
+          "type": "job_change",
+          "text": "started as General Laborer at Clements-Jones Industries Inc"
+        },
+        {
+          "date": "1995-09-05",
+          "type": "job_change",
+          "text": "started as General Laborer at Vincent, Fisher and Dixon Power LLC"
+        },
+        {
+          "date": "1996-05-18",
+          "type": "education",
+          "text": "completed Bachelor at Petersen University (Business Administration)"
+        },
+        {
+          "date": "2001-06-04",
+          "type": "job_change",
+          "text": "started as Librarian at Lopez, Hart and Davis Public Works"
+        },
+        {
+          "date": "2015-04-01",
+          "type": "job_change",
+          "text": "started as Real Estate Agent at Valencia-Owens Consulting"
+        },
+        {
+          "date": "2021-10-01",
+          "type": "marriage",
+          "text": "married Barry May"
+        },
+        {
+          "date": "2024-11-26",
+          "type": "move",
+          "text": "moved to Tampa, FL"
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "events (moves, education, job changes, marriage, divorce)"
+    },
+    "preferences": {
+      "value": {
+        "schedule": "enjoys late-night events",
+        "music": [
+          "video game soundtracks",
+          "pop-punk"
+        ],
+        "hobbies": [
+          "gardening",
+          "cooking",
+          "board games"
+        ],
+        "diet": "no restrictions",
+        "seating": "no seating preference"
+      },
+      "source": "synthetic",
+      "basis": "sampled independently of age and all target attributes (v1 lists)"
+    }
+  },
+  "income_bracket_for_scoring": "$100k-200k",
+  "checks": [
+    {
+      "check": "age matches date of birth at 2026-10-01",
+      "ok": true,
+      "detail": "age 55"
+    },
+    {
+      "check": "all events on or after birth",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "no event after the reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "last move matches current address",
+      "ok": true,
+      "detail": "moved to Tampa, FL vs Tampa"
+    },
+    {
+      "check": "current job start not after reference date",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

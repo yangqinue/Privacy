@@ -1,0 +1,213 @@
+{
+  "persona_id": "u018",
+  "source": {
+    "generator": "ProfileFoundry (GitHub, commit 8239180, Citation License 1.0), US locale",
+    "profile_id": "pf_us_0012521",
+    "household_id": "hh_us_0001252",
+    "reference_date": "2026-10-01"
+  },
+  "fields": {
+    "given_name": {
+      "value": "Douglas",
+      "source": "profilefoundry",
+      "basis": "identity.given_name"
+    },
+    "date_of_birth": {
+      "value": "1987-12-03",
+      "source": "profilefoundry",
+      "basis": "identity.dob"
+    },
+    "age": {
+      "value": 38,
+      "source": "derived",
+      "basis": "date of birth vs reference date 2026-10-01"
+    },
+    "age_group": {
+      "value": "35-44",
+      "source": "derived",
+      "basis": "from age"
+    },
+    "gender": {
+      "value": "Male",
+      "source": "profilefoundry",
+      "basis": "identity.gender"
+    },
+    "marital_status": {
+      "value": "Married",
+      "source": "profilefoundry",
+      "basis": "identity.marital_status"
+    },
+    "partner_at_home": {
+      "value": true,
+      "source": "derived",
+      "basis": "spouse link pf_us_0012520 resolves to a member of the same household"
+    },
+    "own_minor_children": {
+      "value": [
+        {
+          "child_id": "syn_child_2521_1",
+          "age": 8,
+          "sex": "boy",
+          "parents": [
+            "pf_us_0012521",
+            "pf_us_0012520"
+          ],
+          "lives_with_persona": true,
+          "source": "synthetic",
+          "basis": "r5 rule: partnered, aged 25-50, no recorded children, probability 0.5; 1-2 children, age uniform in [0, min(17, younger parent's age - 20)]"
+        },
+        {
+          "child_id": "syn_child_2521_2",
+          "age": 7,
+          "sex": "boy",
+          "parents": [
+            "pf_us_0012521",
+            "pf_us_0012520"
+          ],
+          "lives_with_persona": true,
+          "source": "synthetic",
+          "basis": "r5 rule: partnered, aged 25-50, no recorded children, probability 0.5; 1-2 children, age uniform in [0, min(17, younger parent's age - 20)]"
+        }
+      ],
+      "source": "synthetic",
+      "basis": "rule-added for this preview; ProfileFoundry has no minors"
+    },
+    "own_adult_children": {
+      "value": [],
+      "source": "profilefoundry",
+      "basis": "family.children resolved to generated persons"
+    },
+    "co_resident_adults": {
+      "value": [
+        {
+          "profile_id": "pf_us_0012520",
+          "relation": "partner",
+          "age": 37,
+          "gender": "Female"
+        }
+      ],
+      "source": "derived",
+      "basis": "other members of the same household_id, relation from family links"
+    },
+    "employment": {
+      "value": {
+        "status": "unknown"
+      },
+      "source": "unknown",
+      "basis": "no current job record; retired/student/unemployed cannot be told apart"
+    },
+    "education": {
+      "value": {
+        "degree": "Associate",
+        "institution": "Denver Community College"
+      },
+      "source": "profilefoundry",
+      "basis": "highest degree in education records"
+    },
+    "personal_income_usd": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "finance.annual_income; 0 with empty finance_status treated as not recorded"
+    },
+    "household_income": {
+      "value": {
+        "status": "incomplete",
+        "recorded_sum_usd": 28840,
+        "members_without_recorded_income": 1,
+        "members": 2
+      },
+      "source": "unknown",
+      "basis": "at least one adult member has no recorded income; no bracket is assigned"
+    },
+    "city": {
+      "value": "Los Angeles, CA",
+      "source": "profilefoundry",
+      "basis": "address with valid_to = null"
+    },
+    "health": {
+      "value": {
+        "allergies": [],
+        "disability": null
+      },
+      "source": "profilefoundry",
+      "basis": "health.allergies / health.disability_status"
+    },
+    "life_events": {
+      "value": [
+        {
+          "date": "2008-06-17",
+          "type": "education",
+          "text": "completed Associate at Denver Community College (Criminal Justice)"
+        },
+        {
+          "date": "2014-08-23",
+          "type": "move",
+          "text": "moved to Los Angeles, CA"
+        },
+        {
+          "date": "2021-08-12",
+          "type": "marriage",
+          "text": "married Abigail Schmitt"
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "events (moves, education, job changes, marriage, divorce)"
+    },
+    "preferences": {
+      "value": {
+        "schedule": "prefers morning activities",
+        "music": [
+          "EDM",
+          "video game soundtracks"
+        ],
+        "hobbies": [
+          "gardening",
+          "hiking",
+          "knitting"
+        ],
+        "diet": "vegetarian",
+        "seating": "prefers seated venues over standing"
+      },
+      "source": "synthetic",
+      "basis": "sampled independently of age and all target attributes (v1 lists)"
+    }
+  },
+  "income_bracket_for_scoring": null,
+  "checks": [
+    {
+      "check": "age matches date of birth at 2026-10-01",
+      "ok": true,
+      "detail": "age 38"
+    },
+    {
+      "check": "all events on or after birth",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "no event after the reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "last move matches current address",
+      "ok": true,
+      "detail": "moved to Los Angeles, CA vs Los Angeles"
+    },
+    {
+      "check": "current job start not after reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "synthetic child at least 18 years younger than parent",
+      "ok": true,
+      "detail": "child 8, parent 38"
+    },
+    {
+      "check": "synthetic child at least 18 years younger than parent",
+      "ok": true,
+      "detail": "child 7, parent 38"
+    }
+  ]
+}

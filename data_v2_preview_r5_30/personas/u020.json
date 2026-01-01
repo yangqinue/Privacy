@@ -1,0 +1,220 @@
+{
+  "persona_id": "u020",
+  "source": {
+    "generator": "ProfileFoundry (GitHub, commit 8239180, Citation License 1.0), US locale",
+    "profile_id": "pf_us_0006240",
+    "household_id": "hh_us_0000624",
+    "reference_date": "2026-10-01"
+  },
+  "fields": {
+    "given_name": {
+      "value": "Annette",
+      "source": "profilefoundry",
+      "basis": "identity.given_name"
+    },
+    "date_of_birth": {
+      "value": "1974-02-22",
+      "source": "profilefoundry",
+      "basis": "identity.dob"
+    },
+    "age": {
+      "value": 52,
+      "source": "derived",
+      "basis": "date of birth vs reference date 2026-10-01"
+    },
+    "age_group": {
+      "value": "45-54",
+      "source": "derived",
+      "basis": "from age"
+    },
+    "gender": {
+      "value": "Female",
+      "source": "profilefoundry",
+      "basis": "identity.gender"
+    },
+    "marital_status": {
+      "value": "Married",
+      "source": "profilefoundry",
+      "basis": "identity.marital_status"
+    },
+    "partner_at_home": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "spouse link external is not among generated household members"
+    },
+    "own_minor_children": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "ProfileFoundry generates adults only; minors are not represented"
+    },
+    "own_adult_children": {
+      "value": [],
+      "source": "profilefoundry",
+      "basis": "family.children resolved to generated persons"
+    },
+    "co_resident_adults": {
+      "value": [
+        {
+          "profile_id": "pf_us_0006241",
+          "relation": "other adult (relation not recorded)",
+          "age": 55,
+          "gender": "Male"
+        },
+        {
+          "profile_id": "pf_us_0006242",
+          "relation": "other adult (relation not recorded)",
+          "age": 55,
+          "gender": "Male"
+        },
+        {
+          "profile_id": "pf_us_0006243",
+          "relation": "other adult (relation not recorded)",
+          "age": 55,
+          "gender": "Male"
+        }
+      ],
+      "source": "derived",
+      "basis": "other members of the same household_id, relation from family links"
+    },
+    "employment": {
+      "value": {
+        "status": "Employed",
+        "job_title": "Waiter/Waitress",
+        "employer": "Sandoval-Maxwell Catering Inc"
+      },
+      "source": "profilefoundry",
+      "basis": "employment record with valid_to = null"
+    },
+    "education": {
+      "value": {
+        "degree": "Some College",
+        "institution": "Torres College"
+      },
+      "source": "profilefoundry",
+      "basis": "highest degree in education records"
+    },
+    "personal_income_usd": {
+      "value": 26184,
+      "source": "profilefoundry",
+      "basis": "finance.annual_income; 0 with empty finance_status treated as not recorded"
+    },
+    "household_income": {
+      "value": {
+        "status": "incomplete",
+        "recorded_sum_usd": 26184,
+        "members_without_recorded_income": 3,
+        "members": 4
+      },
+      "source": "unknown",
+      "basis": "at least one adult member has no recorded income; no bracket is assigned"
+    },
+    "city": {
+      "value": "Dallas, TX",
+      "source": "profilefoundry",
+      "basis": "address with valid_to = null"
+    },
+    "health": {
+      "value": {
+        "allergies": [
+          "Dust",
+          "Peanuts"
+        ],
+        "disability": null
+      },
+      "source": "profilefoundry",
+      "basis": "health.allergies / health.disability_status"
+    },
+    "life_events": {
+      "value": [
+        {
+          "date": "1991-07-01",
+          "type": "move",
+          "text": "moved to Indianapolis, IN"
+        },
+        {
+          "date": "1992-11-14",
+          "type": "job_change",
+          "text": "started as Hotel Desk Clerk at Jones-Obrien Hotels LLC"
+        },
+        {
+          "date": "1994-06-21",
+          "type": "education",
+          "text": "completed Some College at Torres College (Health Sciences)"
+        },
+        {
+          "date": "2002-02-22",
+          "type": "job_change",
+          "text": "started as Security Guard at Davis Group Public Works Inc"
+        },
+        {
+          "date": "2007-08-03",
+          "type": "move",
+          "text": "moved to Des Moines, IA"
+        },
+        {
+          "date": "2014-10-01",
+          "type": "marriage",
+          "text": "married Darrell Miller"
+        },
+        {
+          "date": "2021-01-21",
+          "type": "move",
+          "text": "moved to Dallas, TX"
+        },
+        {
+          "date": "2024-11-02",
+          "type": "job_change",
+          "text": "started as Waiter/Waitress at Sandoval-Maxwell Catering Inc"
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "events (moves, education, job changes, marriage, divorce)"
+    },
+    "preferences": {
+      "value": {
+        "schedule": "prefers evening events",
+        "music": [
+          "country",
+          "classic rock"
+        ],
+        "hobbies": [
+          "rock climbing",
+          "hiking",
+          "cycling"
+        ],
+        "diet": "no restrictions",
+        "seating": "no seating preference"
+      },
+      "source": "synthetic",
+      "basis": "sampled independently of age and all target attributes (v1 lists)"
+    }
+  },
+  "income_bracket_for_scoring": null,
+  "checks": [
+    {
+      "check": "age matches date of birth at 2026-10-01",
+      "ok": true,
+      "detail": "age 52"
+    },
+    {
+      "check": "all events on or after birth",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "no event after the reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "last move matches current address",
+      "ok": true,
+      "detail": "moved to Dallas, TX vs Dallas"
+    },
+    {
+      "check": "current job start not after reference date",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

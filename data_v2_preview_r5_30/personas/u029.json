@@ -1,0 +1,195 @@
+{
+  "persona_id": "u029",
+  "source": {
+    "generator": "ProfileFoundry (GitHub, commit 8239180, Citation License 1.0), US locale",
+    "profile_id": "pf_us_0014441",
+    "household_id": "hh_us_0001444",
+    "reference_date": "2026-10-01"
+  },
+  "fields": {
+    "given_name": {
+      "value": "Nicole",
+      "source": "profilefoundry",
+      "basis": "identity.given_name"
+    },
+    "date_of_birth": {
+      "value": "1960-02-08",
+      "source": "profilefoundry",
+      "basis": "identity.dob"
+    },
+    "age": {
+      "value": 66,
+      "source": "derived",
+      "basis": "date of birth vs reference date 2026-10-01"
+    },
+    "age_group": {
+      "value": "65+",
+      "source": "derived",
+      "basis": "from age"
+    },
+    "gender": {
+      "value": "Female",
+      "source": "profilefoundry",
+      "basis": "identity.gender"
+    },
+    "marital_status": {
+      "value": "Married",
+      "source": "profilefoundry",
+      "basis": "identity.marital_status"
+    },
+    "partner_at_home": {
+      "value": true,
+      "source": "derived",
+      "basis": "spouse link pf_us_0014440 resolves to a member of the same household"
+    },
+    "own_minor_children": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "ProfileFoundry generates adults only; minors are not represented"
+    },
+    "own_adult_children": {
+      "value": [
+        {
+          "profile_id": "pf_us_0014442",
+          "age": 28,
+          "co_resident": true
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "family.children resolved to generated persons"
+    },
+    "co_resident_adults": {
+      "value": [
+        {
+          "profile_id": "pf_us_0014440",
+          "relation": "partner",
+          "age": 72,
+          "gender": "Male"
+        },
+        {
+          "profile_id": "pf_us_0014442",
+          "relation": "adult child",
+          "age": 28,
+          "gender": "Male"
+        }
+      ],
+      "source": "derived",
+      "basis": "other members of the same household_id, relation from family links"
+    },
+    "employment": {
+      "value": {
+        "status": "unknown"
+      },
+      "source": "unknown",
+      "basis": "no current job record; retired/student/unemployed cannot be told apart"
+    },
+    "education": {
+      "value": {
+        "degree": "Bachelor",
+        "institution": "Nashville Institute of Technology"
+      },
+      "source": "profilefoundry",
+      "basis": "highest degree in education records"
+    },
+    "personal_income_usd": {
+      "value": 52822,
+      "source": "profilefoundry",
+      "basis": "finance.annual_income; 0 with empty finance_status treated as not recorded"
+    },
+    "household_income": {
+      "value": {
+        "status": "complete",
+        "sum_usd": 95510,
+        "bracket": "$50k-100k",
+        "members": 3
+      },
+      "source": "derived",
+      "basis": "sum of annual_income (USD) over all adult household members"
+    },
+    "city": {
+      "value": "Albuquerque, NM",
+      "source": "profilefoundry",
+      "basis": "address with valid_to = null"
+    },
+    "health": {
+      "value": {
+        "allergies": [],
+        "disability": "Chronic Illness"
+      },
+      "source": "profilefoundry",
+      "basis": "health.allergies / health.disability_status"
+    },
+    "life_events": {
+      "value": [
+        {
+          "date": "1983-05-13",
+          "type": "education",
+          "text": "completed Bachelor at Nashville Institute of Technology (Nursing)"
+        },
+        {
+          "date": "1994-09-25",
+          "type": "marriage",
+          "text": "married Brian Brewer"
+        },
+        {
+          "date": "2002-09-20",
+          "type": "move",
+          "text": "moved to Wichita, KS"
+        },
+        {
+          "date": "2025-06-25",
+          "type": "move",
+          "text": "moved to Albuquerque, NM"
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "events (moves, education, job changes, marriage, divorce)"
+    },
+    "preferences": {
+      "value": {
+        "schedule": "prefers evening events",
+        "music": [
+          "pop-punk",
+          "folk"
+        ],
+        "hobbies": [
+          "fishing",
+          "video games",
+          "hiking"
+        ],
+        "diet": "vegetarian",
+        "seating": "prefers seated venues over standing"
+      },
+      "source": "synthetic",
+      "basis": "sampled independently of age and all target attributes (v1 lists)"
+    }
+  },
+  "income_bracket_for_scoring": "$50k-100k",
+  "checks": [
+    {
+      "check": "age matches date of birth at 2026-10-01",
+      "ok": true,
+      "detail": "age 66"
+    },
+    {
+      "check": "all events on or after birth",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "no event after the reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "last move matches current address",
+      "ok": true,
+      "detail": "moved to Albuquerque, NM vs Albuquerque"
+    },
+    {
+      "check": "current job start not after reference date",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

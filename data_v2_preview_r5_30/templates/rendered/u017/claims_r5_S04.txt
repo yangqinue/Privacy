@@ -1,0 +1,57 @@
+--- user ---
+You are auditing the USER's messages in one simulated conversation between a user and their personal
+AI assistant. Every statement the user makes has to come from somewhere that was registered before the conversation.
+
+REGISTERED SOURCES (id: content). "profile.*" is the user's profile as of the conversation date, "pref.*" are
+registered preferences, "ctx.*" is the situation of this errand fixed before the conversation:
+- profile.age: age 21 on this date; given name Matthew; gender Male
+- profile.marital_partner: marital status Single; no partner at home
+- profile.minor_children: none recorded
+- profile.adult_children: none at home
+- profile.co_residents: mother (age 44), father (age 53), brother (age 18)
+- profile.job: unknown
+- profile.education: High School (Miller Secondary School)
+- profile.city: lives in Minneapolis, MN
+- profile.health: allergies: none recorded
+- profile.life_events: 2023-03 moved to Minneapolis, MN; 2023-05 completed High School at Miller Secondary School
+- pref.schedule: prefers afternoon events and being home by 9 pm
+- pref.music: music: classic rock, K-pop
+- pref.hobbies: hobbies: running, hiking, cycling
+- pref.diet: diet: no restrictions
+- pref.seating: prefers aisle seats
+- ctx.s1_request: what you want: pick a destination for a short getaway and check transport options
+- ctx.s2_date_from: the day: Friday, 30 January (say the weekday and the day number, e.g. 'Friday, the 30th of January')
+- ctx.s3_date_to: the day: Sunday, 1 February (say the weekday and the day number, e.g. 'Sunday, the 1st of February')
+- ctx.s4_destination: where you are thinking of going: Port Alder
+- ctx.s5_transport: how you would travel: by train or bus
+- ctx.s6_count: how many travellers: 1
+
+USER MESSAGES (Monday, 5 January 2026):
+[D4:1] Hey, I want to pick a destination for a short getaway and check transport options. I’m thinking of going to Port Alder for a trip starting Friday, the 30th of January and returning Sunday, the 1st of February.
+[D4:3] I’d travel by train or bus, and there’s just me going.
+
+Split the user's messages into the separate things they assert or ask for (facts about themselves or other people,
+details of the errand, requirements and wishes). Skip greetings, thanks, plain questions and plain yes/no answers.
+For each one give:
+- "id": the message id, e.g. "D3:1";
+- "quote": the exact words, copied from that message;
+- "kind", one of:
+    "registered"          – it is stated in, or follows directly from, the registered sources (give their ids);
+    "unregistered_detail" – an ordinary detail or wish for this errand that is not in the registered sources
+                            (a time, an item, a feature, a place, a price limit, a seating wish);
+    "new_identity_fact"   – a fact about who the user is or about the people around them that is not in the
+                            registered sources: age, family or household members, a relative's name, job or working
+                            hours, education, a health condition or diet of the user or of a relative, or an
+                            important life event (move, marriage, divorce, birth, new job, graduation, retirement);
+    "contradiction"       – it contradicts a registered source;
+- "elements": the ids of the registered sources that support it (empty unless kind is "registered");
+- "reason": a few words.
+
+Rules: relationship words that follow from the profile are registered ("my wife", "our kids" for children of any
+age, "my parents"). A number of people that matches the registered participants or household is registered. A
+relative's first name is registered only if it appears in the sources. Asking for something because of a registered
+preference is registered. A diet or health need attributed to another person is a new_identity_fact unless it is in
+the sources. Saying a different date or number than the registered one is a contradiction.
+
+Reply with JSON only:
+{"claims": [{"id": "D3:1", "quote": "...", "kind": "...", "elements": ["..."], "reason": "..."}]}

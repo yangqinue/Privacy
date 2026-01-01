@@ -1,0 +1,192 @@
+{
+  "persona_id": "u016",
+  "source": {
+    "generator": "ProfileFoundry (GitHub, commit 8239180, Citation License 1.0), US locale",
+    "profile_id": "pf_us_0005771",
+    "household_id": "hh_us_0000577",
+    "reference_date": "2026-10-01"
+  },
+  "fields": {
+    "given_name": {
+      "value": "Alejandra",
+      "source": "profilefoundry",
+      "basis": "identity.given_name"
+    },
+    "date_of_birth": {
+      "value": "2001-11-25",
+      "source": "profilefoundry",
+      "basis": "identity.dob"
+    },
+    "age": {
+      "value": 24,
+      "source": "derived",
+      "basis": "date of birth vs reference date 2026-10-01"
+    },
+    "age_group": {
+      "value": "18-24",
+      "source": "derived",
+      "basis": "from age"
+    },
+    "gender": {
+      "value": "Female",
+      "source": "profilefoundry",
+      "basis": "identity.gender"
+    },
+    "marital_status": {
+      "value": "Single",
+      "source": "profilefoundry",
+      "basis": "identity.marital_status"
+    },
+    "partner_at_home": {
+      "value": false,
+      "source": "derived",
+      "basis": "no spouse link; marital status Single"
+    },
+    "own_minor_children": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "ProfileFoundry generates adults only; minors are not represented"
+    },
+    "own_adult_children": {
+      "value": [],
+      "source": "profilefoundry",
+      "basis": "family.children resolved to generated persons"
+    },
+    "co_resident_adults": {
+      "value": [
+        {
+          "profile_id": "pf_us_0005770",
+          "relation": "parent",
+          "age": 47,
+          "gender": "Female"
+        },
+        {
+          "profile_id": "pf_us_0005772",
+          "relation": "sibling",
+          "age": 18,
+          "gender": "Male"
+        },
+        {
+          "profile_id": "pf_us_0005773",
+          "relation": "sibling",
+          "age": 21,
+          "gender": "Female"
+        }
+      ],
+      "source": "derived",
+      "basis": "other members of the same household_id, relation from family links"
+    },
+    "employment": {
+      "value": {
+        "status": "Employed",
+        "job_title": "Cashier",
+        "employer": "Bradley Markets Corp"
+      },
+      "source": "profilefoundry",
+      "basis": "employment record with valid_to = null"
+    },
+    "education": {
+      "value": {
+        "degree": "High School",
+        "institution": "Roberts Secondary School"
+      },
+      "source": "profilefoundry",
+      "basis": "highest degree in education records"
+    },
+    "personal_income_usd": {
+      "value": 21119,
+      "source": "profilefoundry",
+      "basis": "finance.annual_income; 0 with empty finance_status treated as not recorded"
+    },
+    "household_income": {
+      "value": {
+        "status": "incomplete",
+        "recorded_sum_usd": 83276,
+        "members_without_recorded_income": 1,
+        "members": 4
+      },
+      "source": "unknown",
+      "basis": "at least one adult member has no recorded income; no bracket is assigned"
+    },
+    "city": {
+      "value": "Birmingham, AL",
+      "source": "profilefoundry",
+      "basis": "address with valid_to = null"
+    },
+    "health": {
+      "value": {
+        "allergies": [],
+        "disability": null
+      },
+      "source": "profilefoundry",
+      "basis": "health.allergies / health.disability_status"
+    },
+    "life_events": {
+      "value": [
+        {
+          "date": "2015-06-13",
+          "type": "move",
+          "text": "moved to Birmingham, AL"
+        },
+        {
+          "date": "2019-06-11",
+          "type": "education",
+          "text": "completed High School at Roberts Secondary School"
+        },
+        {
+          "date": "2024-01-10",
+          "type": "job_change",
+          "text": "started as Cashier at Bradley Markets Corp"
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "events (moves, education, job changes, marriage, divorce)"
+    },
+    "preferences": {
+      "value": {
+        "schedule": "prefers evening events",
+        "music": [
+          "classical",
+          "K-pop"
+        ],
+        "hobbies": [
+          "cooking",
+          "knitting",
+          "gardening"
+        ],
+        "diet": "no restrictions",
+        "seating": "no seating preference"
+      },
+      "source": "synthetic",
+      "basis": "sampled independently of age and all target attributes (v1 lists)"
+    }
+  },
+  "income_bracket_for_scoring": null,
+  "checks": [
+    {
+      "check": "age matches date of birth at 2026-10-01",
+      "ok": true,
+      "detail": "age 24"
+    },
+    {
+      "check": "all events on or after birth",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "no event after the reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "last move matches current address",
+      "ok": true,
+      "detail": "moved to Birmingham, AL vs Birmingham"
+    },
+    {
+      "check": "current job start not after reference date",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

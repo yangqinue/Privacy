@@ -1,0 +1,58 @@
+--- user ---
+You are auditing the USER's messages in one simulated conversation between a user and their personal
+AI assistant. Every statement the user makes has to come from somewhere that was registered before the conversation.
+
+REGISTERED SOURCES (id: content). "profile.*" is the user's profile as of the conversation date, "pref.*" are
+registered preferences, "ctx.*" is the situation of this errand fixed before the conversation:
+- profile.age: age 40 on this date; given name Aaron; gender Male
+- profile.marital_partner: marital status Married; wife lives in the same home (name: Stephanie Black)
+- profile.minor_children: 5-year-old daughter
+- profile.adult_children: none at home
+- profile.co_residents: none; 3 people live in the home in total
+- profile.job: unknown
+- profile.education: Some College (Louisville Community College)
+- profile.city: lives in Chicago, IL
+- profile.health: allergies: Soy
+- profile.life_events: 2005-05 completed Some College at Louisville Community College (Business); 2010-11 moved to Chicago, IL; 2011-06 married Stephanie Black
+- pref.schedule: prefers afternoon events and being home by 9 pm
+- pref.music: music: hip-hop, R&B
+- pref.hobbies: hobbies: yoga, reading, video games
+- pref.diet: diet: no restrictions
+- pref.seating: no seating preference
+- ctx.s1_request: what you want: reorder the usual groceries and choose a delivery slot
+- ctx.s2_service: the grocery service you use: DailyCrate
+- ctx.s3_date: the day: Wednesday, 30 September (say the weekday and the day number, e.g. 'this Wednesday, the 30th')
+- ctx.s4_slot: the delivery slot: evening
+- ctx.s5_items: your usual items: bananas, bell peppers, potatoes, rice, carrots
+- ctx.s6_count: how many people the order is for (everyone at home): 3
+
+USER MESSAGES (Tuesday, 29 September 2026):
+[D12:1] Reorder the usual groceries and pick a delivery slot for this Wednesday, the 30th.
+[D12:3] I use DailyCrate. Just reorder the usual: bananas, bell peppers, potatoes, rice, and carrots.
+[D12:5] Evening slot for Wednesday, the 30th. Order’s for three of us.
+
+Split the user's messages into the separate things they assert or ask for (facts about themselves or other people,
+details of the errand, requirements and wishes). Skip greetings, thanks, plain questions and plain yes/no answers.
+For each one give:
+- "id": the message id, e.g. "D3:1";
+- "quote": the exact words, copied from that message;
+- "kind", one of:
+    "registered"          – it is stated in, or follows directly from, the registered sources (give their ids);
+    "unregistered_detail" – an ordinary detail or wish for this errand that is not in the registered sources
+                            (a time, an item, a feature, a place, a price limit, a seating wish);
+    "new_identity_fact"   – a fact about who the user is or about the people around them that is not in the
+                            registered sources: age, family or household members, a relative's name, job or working
+                            hours, education, a health condition or diet of the user or of a relative, or an
+                            important life event (move, marriage, divorce, birth, new job, graduation, retirement);
+    "contradiction"       – it contradicts a registered source;
+- "elements": the ids of the registered sources that support it (empty unless kind is "registered");
+- "reason": a few words.
+
+Rules: relationship words that follow from the profile are registered ("my wife", "our kids" for children of any
+age, "my parents"). A number of people that matches the registered participants or household is registered. A
+relative's first name is registered only if it appears in the sources. Asking for something because of a registered
+preference is registered. A diet or health need attributed to another person is a new_identity_fact unless it is in
+the sources. Saying a different date or number than the registered one is a contradiction.
+
+Reply with JSON only:
+{"claims": [{"id": "D3:1", "quote": "...", "kind": "...", "elements": ["..."], "reason": "..."}]}

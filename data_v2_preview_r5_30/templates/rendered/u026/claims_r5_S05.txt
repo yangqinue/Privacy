@@ -1,0 +1,58 @@
+--- user ---
+You are auditing the USER's messages in one simulated conversation between a user and their personal
+AI assistant. Every statement the user makes has to come from somewhere that was registered before the conversation.
+
+REGISTERED SOURCES (id: content). "profile.*" is the user's profile as of the conversation date, "pref.*" are
+registered preferences, "ctx.*" is the situation of this errand fixed before the conversation:
+- profile.age: age 40 on this date; given name Aaron; gender Male
+- profile.marital_partner: marital status Married; wife lives in the same home (name: Stephanie Black)
+- profile.minor_children: 5-year-old daughter
+- profile.adult_children: none at home
+- profile.co_residents: none; 3 people live in the home in total
+- profile.job: unknown
+- profile.education: Some College (Louisville Community College)
+- profile.city: lives in Chicago, IL
+- profile.health: allergies: Soy
+- profile.life_events: 2005-05 completed Some College at Louisville Community College (Business); 2010-11 moved to Chicago, IL; 2011-06 married Stephanie Black
+- pref.schedule: prefers afternoon events and being home by 9 pm
+- pref.music: music: hip-hop, R&B
+- pref.hobbies: hobbies: yoga, reading, video games
+- pref.diet: diet: no restrictions
+- pref.seating: no seating preference
+- ctx.s1_request: what you want: move an existing dinner reservation to a different time
+- ctx.s2_venue: the restaurant where you have a reservation: Marigold Diner
+- ctx.s3_date: the day: Thursday, 2 July (say the weekday and the day number, e.g. 'this Thursday, the 2nd')
+- ctx.s4_time: the time of the reservation now: about 7:00 pm
+- ctx.s5_time: the new time you want: about 7:30 pm
+- ctx.s6_count: how many people: 1
+
+USER MESSAGES (Monday, 29 June 2026):
+[D5:1] I want to move an existing dinner reservation to a different time. It's this Thursday, the 2nd.
+[D5:3] The reservation is for this Thursday, the 2nd, at about 7:00 pm. I want to move it to about 7:30 pm.
+[D5:5] It’s at Marigold Diner for 1 person. Can you move it to 7:30 pm on Thursday, the 2nd?
+
+Split the user's messages into the separate things they assert or ask for (facts about themselves or other people,
+details of the errand, requirements and wishes). Skip greetings, thanks, plain questions and plain yes/no answers.
+For each one give:
+- "id": the message id, e.g. "D3:1";
+- "quote": the exact words, copied from that message;
+- "kind", one of:
+    "registered"          – it is stated in, or follows directly from, the registered sources (give their ids);
+    "unregistered_detail" – an ordinary detail or wish for this errand that is not in the registered sources
+                            (a time, an item, a feature, a place, a price limit, a seating wish);
+    "new_identity_fact"   – a fact about who the user is or about the people around them that is not in the
+                            registered sources: age, family or household members, a relative's name, job or working
+                            hours, education, a health condition or diet of the user or of a relative, or an
+                            important life event (move, marriage, divorce, birth, new job, graduation, retirement);
+    "contradiction"       – it contradicts a registered source;
+- "elements": the ids of the registered sources that support it (empty unless kind is "registered");
+- "reason": a few words.
+
+Rules: relationship words that follow from the profile are registered ("my wife", "our kids" for children of any
+age, "my parents"). A number of people that matches the registered participants or household is registered. A
+relative's first name is registered only if it appears in the sources. Asking for something because of a registered
+preference is registered. A diet or health need attributed to another person is a new_identity_fact unless it is in
+the sources. Saying a different date or number than the registered one is a contradiction.
+
+Reply with JSON only:
+{"claims": [{"id": "D3:1", "quote": "...", "kind": "...", "elements": ["..."], "reason": "..."}]}

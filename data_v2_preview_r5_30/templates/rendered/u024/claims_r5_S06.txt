@@ -1,0 +1,54 @@
+--- user ---
+You are auditing the USER's messages in one simulated conversation between a user and their personal
+AI assistant. Every statement the user makes has to come from somewhere that was registered before the conversation.
+
+REGISTERED SOURCES (id: content). "profile.*" is the user's profile as of the conversation date, "pref.*" are
+registered preferences, "ctx.*" is the situation of this errand fixed before the conversation:
+- profile.age: age 72 on this date; given name Robert; gender Male
+- profile.marital_partner: marital status Married; wife lives in the same home (name: Lisa Cordova)
+- profile.minor_children: none recorded
+- profile.adult_children: none at home
+- profile.co_residents: none; 2 people live in the home in total
+- profile.job: unknown
+- profile.education: Bachelor (Gomez University)
+- profile.city: lives in New York, NY
+- profile.health: allergies: none recorded
+- profile.life_events: 1980-05 completed Bachelor at Gomez University (Accounting); 2000-06 moved to Manchester, NH; 2017-04 moved to New York, NY; 2019-07 married Lisa Cordova
+- pref.schedule: prefers evening events
+- pref.music: music: R&B, classic rock
+- pref.hobbies: hobbies: gardening, hiking, yoga
+- pref.diet: diet: no restrictions
+- pref.seating: prefers seated venues over standing
+- ctx.s1_request: what you want: find a place for a weekend lunch and reserve it
+- ctx.s2_date: the day: Sunday, 4 January (say the weekday and the day number, e.g. 'this Sunday, the 4th')
+- ctx.s3_time: the time: about 1:00 pm
+- ctx.s4_count: how many people: 1
+
+USER MESSAGES (Thursday, 1 January 2026):
+[D6:1] Find a place for a weekend lunch and reserve it. I want a spot for 1 on Sunday, the 4th, around 1:00 pm.
+
+Split the user's messages into the separate things they assert or ask for (facts about themselves or other people,
+details of the errand, requirements and wishes). Skip greetings, thanks, plain questions and plain yes/no answers.
+For each one give:
+- "id": the message id, e.g. "D3:1";
+- "quote": the exact words, copied from that message;
+- "kind", one of:
+    "registered"          – it is stated in, or follows directly from, the registered sources (give their ids);
+    "unregistered_detail" – an ordinary detail or wish for this errand that is not in the registered sources
+                            (a time, an item, a feature, a place, a price limit, a seating wish);
+    "new_identity_fact"   – a fact about who the user is or about the people around them that is not in the
+                            registered sources: age, family or household members, a relative's name, job or working
+                            hours, education, a health condition or diet of the user or of a relative, or an
+                            important life event (move, marriage, divorce, birth, new job, graduation, retirement);
+    "contradiction"       – it contradicts a registered source;
+- "elements": the ids of the registered sources that support it (empty unless kind is "registered");
+- "reason": a few words.
+
+Rules: relationship words that follow from the profile are registered ("my wife", "our kids" for children of any
+age, "my parents"). A number of people that matches the registered participants or household is registered. A
+relative's first name is registered only if it appears in the sources. Asking for something because of a registered
+preference is registered. A diet or health need attributed to another person is a new_identity_fact unless it is in
+the sources. Saying a different date or number than the registered one is a contradiction.
+
+Reply with JSON only:
+{"claims": [{"id": "D3:1", "quote": "...", "kind": "...", "elements": ["..."], "reason": "..."}]}

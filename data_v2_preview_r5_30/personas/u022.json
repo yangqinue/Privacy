@@ -1,0 +1,178 @@
+{
+  "persona_id": "u022",
+  "source": {
+    "generator": "ProfileFoundry (GitHub, commit 8239180, Citation License 1.0), US locale",
+    "profile_id": "pf_us_0004650",
+    "household_id": "hh_us_0000465",
+    "reference_date": "2026-10-01"
+  },
+  "fields": {
+    "given_name": {
+      "value": "John",
+      "source": "profilefoundry",
+      "basis": "identity.given_name"
+    },
+    "date_of_birth": {
+      "value": "1960-05-28",
+      "source": "profilefoundry",
+      "basis": "identity.dob"
+    },
+    "age": {
+      "value": 66,
+      "source": "derived",
+      "basis": "date of birth vs reference date 2026-10-01"
+    },
+    "age_group": {
+      "value": "65+",
+      "source": "derived",
+      "basis": "from age"
+    },
+    "gender": {
+      "value": "Male",
+      "source": "profilefoundry",
+      "basis": "identity.gender"
+    },
+    "marital_status": {
+      "value": "Married",
+      "source": "profilefoundry",
+      "basis": "identity.marital_status"
+    },
+    "partner_at_home": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "spouse link external is not among generated household members"
+    },
+    "own_minor_children": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "ProfileFoundry generates adults only; minors are not represented"
+    },
+    "own_adult_children": {
+      "value": [],
+      "source": "profilefoundry",
+      "basis": "family.children resolved to generated persons"
+    },
+    "co_resident_adults": {
+      "value": [],
+      "source": "derived",
+      "basis": "other members of the same household_id, relation from family links"
+    },
+    "employment": {
+      "value": {
+        "status": "unknown"
+      },
+      "source": "unknown",
+      "basis": "no current job record; retired/student/unemployed cannot be told apart"
+    },
+    "education": {
+      "value": {
+        "degree": "High School",
+        "institution": "Minneapolis Senior High School"
+      },
+      "source": "profilefoundry",
+      "basis": "highest degree in education records"
+    },
+    "personal_income_usd": {
+      "value": 18526,
+      "source": "profilefoundry",
+      "basis": "finance.annual_income; 0 with empty finance_status treated as not recorded"
+    },
+    "household_income": {
+      "value": {
+        "status": "complete",
+        "sum_usd": 18526,
+        "bracket": "<$25k",
+        "members": 1
+      },
+      "source": "derived",
+      "basis": "sum of annual_income (USD) over all adult household members"
+    },
+    "city": {
+      "value": "Dallas, TX",
+      "source": "profilefoundry",
+      "basis": "address with valid_to = null"
+    },
+    "health": {
+      "value": {
+        "allergies": [
+          "Pollen"
+        ],
+        "disability": null
+      },
+      "source": "profilefoundry",
+      "basis": "health.allergies / health.disability_status"
+    },
+    "life_events": {
+      "value": [
+        {
+          "date": "1979-06-04",
+          "type": "education",
+          "text": "completed High School at Minneapolis Senior High School"
+        },
+        {
+          "date": "2006-10-05",
+          "type": "move",
+          "text": "moved to Manchester, NH"
+        },
+        {
+          "date": "2010-03-09",
+          "type": "move",
+          "text": "moved to Dallas, TX"
+        },
+        {
+          "date": "2022-10-01",
+          "type": "marriage",
+          "text": "married Stacey Harmon"
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "events (moves, education, job changes, marriage, divorce)"
+    },
+    "preferences": {
+      "value": {
+        "schedule": "prefers evening events",
+        "music": [
+          "jazz",
+          "country"
+        ],
+        "hobbies": [
+          "gardening",
+          "photography",
+          "yoga"
+        ],
+        "diet": "lactose intolerant",
+        "seating": "no seating preference"
+      },
+      "source": "synthetic",
+      "basis": "sampled independently of age and all target attributes (v1 lists)"
+    }
+  },
+  "income_bracket_for_scoring": "<$25k",
+  "checks": [
+    {
+      "check": "age matches date of birth at 2026-10-01",
+      "ok": true,
+      "detail": "age 66"
+    },
+    {
+      "check": "all events on or after birth",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "no event after the reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "last move matches current address",
+      "ok": true,
+      "detail": "moved to Dallas, TX vs Dallas"
+    },
+    {
+      "check": "current job start not after reference date",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

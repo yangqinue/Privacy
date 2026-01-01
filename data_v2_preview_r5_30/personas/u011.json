@@ -1,0 +1,200 @@
+{
+  "persona_id": "u011",
+  "source": {
+    "generator": "ProfileFoundry (GitHub, commit 8239180, Citation License 1.0), US locale",
+    "profile_id": "pf_us_0000874",
+    "household_id": "hh_us_0000087",
+    "reference_date": "2026-10-01"
+  },
+  "fields": {
+    "given_name": {
+      "value": "Christine",
+      "source": "profilefoundry",
+      "basis": "identity.given_name"
+    },
+    "date_of_birth": {
+      "value": "2001-05-08",
+      "source": "profilefoundry",
+      "basis": "identity.dob"
+    },
+    "age": {
+      "value": 25,
+      "source": "derived",
+      "basis": "date of birth vs reference date 2026-10-01"
+    },
+    "age_group": {
+      "value": "25-34",
+      "source": "derived",
+      "basis": "from age"
+    },
+    "gender": {
+      "value": "Female",
+      "source": "profilefoundry",
+      "basis": "identity.gender"
+    },
+    "marital_status": {
+      "value": "Single",
+      "source": "profilefoundry",
+      "basis": "identity.marital_status"
+    },
+    "partner_at_home": {
+      "value": false,
+      "source": "derived",
+      "basis": "no spouse link; marital status Single"
+    },
+    "own_minor_children": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "ProfileFoundry generates adults only; minors are not represented"
+    },
+    "own_adult_children": {
+      "value": [],
+      "source": "profilefoundry",
+      "basis": "family.children resolved to generated persons"
+    },
+    "co_resident_adults": {
+      "value": [
+        {
+          "profile_id": "pf_us_0000870",
+          "relation": "parent",
+          "age": 56,
+          "gender": "Female"
+        },
+        {
+          "profile_id": "pf_us_0000871",
+          "relation": "parent",
+          "age": 52,
+          "gender": "Male"
+        },
+        {
+          "profile_id": "pf_us_0000872",
+          "relation": "other adult (relation not recorded)",
+          "age": 79,
+          "gender": "Male"
+        },
+        {
+          "profile_id": "pf_us_0000873",
+          "relation": "sibling",
+          "age": 28,
+          "gender": "Female"
+        }
+      ],
+      "source": "derived",
+      "basis": "other members of the same household_id, relation from family links"
+    },
+    "employment": {
+      "value": {
+        "status": "Employed",
+        "job_title": "Medical Assistant",
+        "employer": "Rogers-Snyder Partners Inc"
+      },
+      "source": "profilefoundry",
+      "basis": "employment record with valid_to = null"
+    },
+    "education": {
+      "value": {
+        "degree": "Bachelor",
+        "institution": "University of Bridgeport"
+      },
+      "source": "profilefoundry",
+      "basis": "highest degree in education records"
+    },
+    "personal_income_usd": {
+      "value": 25264,
+      "source": "profilefoundry",
+      "basis": "finance.annual_income; 0 with empty finance_status treated as not recorded"
+    },
+    "household_income": {
+      "value": {
+        "status": "complete",
+        "sum_usd": 248802,
+        "bracket": "$200k+",
+        "members": 5
+      },
+      "source": "derived",
+      "basis": "sum of annual_income (USD) over all adult household members"
+    },
+    "city": {
+      "value": "Baltimore, MD",
+      "source": "profilefoundry",
+      "basis": "address with valid_to = null"
+    },
+    "health": {
+      "value": {
+        "allergies": [
+          "Pollen"
+        ],
+        "disability": null
+      },
+      "source": "profilefoundry",
+      "basis": "health.allergies / health.disability_status"
+    },
+    "life_events": {
+      "value": [
+        {
+          "date": "2016-07-14",
+          "type": "move",
+          "text": "moved to Baltimore, MD"
+        },
+        {
+          "date": "2023-05-10",
+          "type": "education",
+          "text": "completed Bachelor at University of Bridgeport (Health Sciences)"
+        },
+        {
+          "date": "2025-08-07",
+          "type": "job_change",
+          "text": "started as Medical Assistant at Rogers-Snyder Partners Inc"
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "events (moves, education, job changes, marriage, divorce)"
+    },
+    "preferences": {
+      "value": {
+        "schedule": "prefers evening events",
+        "music": [
+          "video game soundtracks",
+          "EDM"
+        ],
+        "hobbies": [
+          "knitting",
+          "gardening",
+          "hiking"
+        ],
+        "diet": "vegetarian",
+        "seating": "prefers aisle seats"
+      },
+      "source": "synthetic",
+      "basis": "sampled independently of age and all target attributes (v1 lists)"
+    }
+  },
+  "income_bracket_for_scoring": "$200k+",
+  "checks": [
+    {
+      "check": "age matches date of birth at 2026-10-01",
+      "ok": true,
+      "detail": "age 25"
+    },
+    {
+      "check": "all events on or after birth",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "no event after the reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "last move matches current address",
+      "ok": true,
+      "detail": "moved to Baltimore, MD vs Baltimore"
+    },
+    {
+      "check": "current job start not after reference date",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}
