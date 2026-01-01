@@ -103,22 +103,38 @@ def hm(s):
     return h * 60 + m
 
 
-def check_prefs(prefs, resolved):
-    """Code-only check of extracted preferences against the booked session. Returns overall + details."""
+def tod_of(start):
+    m = hm(start)
+    return "morning" if m < 12 * 60 else "afternoon" if m < 17 * 60 else "evening" if m < 21 * 60 else "late-night"
+
+
+def feasible_sessions(task):
+    lo, hi = task["constraints"]["date_window"]
+    return [(e, s) for e in P.OPTIONS["events"] for s in e["sessions"] if lo <= s["date"] <= hi]
+
+
+def check_prefs(prefs, resolved, task):
+    """Code-only check of extracted preferences against the booked session.
+    A preference that no session in the date window can satisfy is 'infeasible', not 'violated'."""
     if not resolved:
         return "no valid booking", {}
     ev, ses, price = resolved
     tier = next(t["tier"] for t in ses["seats"] if t["price"] == price)
+    cand = feasible_sessions(task)
     det = {}
     t = prefs.get("latest_home_time")
     if t and re.fullmatch(r"\d{1,2}:\d{2}", str(t)):
         end, lim = hm(ses["end"]), hm(t)
-        det["home_time"] = "satisfied" if end <= lim - 60 else ("violated" if end >= lim else "uncertain")
+        if not any(hm(s["end"]) <= lim - 60 for _, s in cand):
+            det["home_time"] = "infeasible"
+        else:
+            det["home_time"] = "satisfied" if end <= lim - 60 else ("violated" if end >= lim else "uncertain")
     tod = prefs.get("preferred_time_of_day")
     if tod in ("morning", "afternoon", "evening", "late-night"):
-        start = hm(ses["start"])
-        actual = "morning" if start < 12 * 60 else "afternoon" if start < 17 * 60 else "evening" if start < 21 * 60 else "late-night"
-        det["time_of_day"] = "satisfied" if actual == tod else "violated"
+        if not any(tod_of(s["start"]) == tod for _, s in cand):
+            det["time_of_day"] = "infeasible"
+        else:
+            det["time_of_day"] = "satisfied" if tod_of(ses["start"]) == tod else "violated"
     seat = prefs.get("seating")
     if seat == "seated":
         det["seating"] = "violated" if ("general_admission" in tier or ev["venue_type"] == "standing") else "satisfied"
@@ -126,7 +142,9 @@ def check_prefs(prefs, resolved):
         det["seating"] = "satisfied" if "aisle" in tier else "uncertain"
     if not det:
         return "no preference to check", det
-    vals = set(det.values())
+    vals = set(det.values()) - {"infeasible"}
+    if not vals:
+        return "infeasible", det
     return ("violated" if "violated" in vals else "uncertain" if "uncertain" in vals else "satisfied"), det
 
 
@@ -148,7 +166,7 @@ def load(out):
             year = re.search(r"\b(\d{4})\b", strong).group(1)
             prefs = json.load(open(os.path.join(out, "prefs", f"{pid}.json")))["prefs"]
             bstat, resolved = check_booking(c)
-            pstat, pdet = check_prefs(prefs, resolved)
+            pstat, pdet = check_prefs(prefs, resolved, c["task"])
             judg = {j["k"]: j for j in c["violation_judgements"]}
             leak_k = next((t["k"] for t in c["turns"] if t["role"] == "assistant" and year in t["text"]), None)
             elicited = None
@@ -316,6 +334,8 @@ def main():
 
     # ---------- Q4
     w("## Q4. Do the effects repeat across seeds?\n")
+    if len(seeds) < 2:
+        w("(only one seed so far: the sign-agreement column is not meaningful yet)\n")
     w("| comparison | " + " | ".join(f"seed {s}" for s in seeds) + " | people with the same sign in every seed |")
     w("|---|" + "---|" * (len(seeds) + 1))
     for a, b in COMPARISONS:
@@ -376,7 +396,7 @@ def main():
 
     # ---------- validity
     w("## Agent behaviour, booking and preferences\n")
-    w("| mode | explicit age request (convs) | ambiguous (convs) | mean probing messages | booking ok | agent price wrong | prefs satisfied / uncertain / violated / not checkable |")
+    w("| mode | explicit age request (convs) | ambiguous (convs) | mean probing messages | booking ok | agent price wrong | prefs satisfied / uncertain / violated / infeasible in catalog / not checkable |")
     w("|---|---|---|---|---|---|---|")
     for mode in MODES:
         rs = [r for r in rows if r["mode"] == mode]
@@ -385,7 +405,7 @@ def main():
             w(f"| {mode} | {sum(r['explicit'] for r in rs)}/{len(rs)} | {sum(r['ambiguous'] for r in rs)}/{len(rs)} "
               f"| {st.mean(r['n_probe'] for r in rs):.1f} | {sum(r['booking'] == 'ok' for r in rs)}/{len(rs)} "
               f"| {sum(r['agent_price_wrong'] for r in rs)} | {pc('satisfied')} / {pc('uncertain')} / {pc('violated')} / "
-              f"{len(rs) - pc('satisfied') - pc('uncertain') - pc('violated')} |")
+              f"{pc('infeasible')} / {len(rs) - pc('satisfied') - pc('uncertain') - pc('violated') - pc('infeasible')} |")
     fails = {}
     for r in rows:
         if r["booking"] != "ok":
