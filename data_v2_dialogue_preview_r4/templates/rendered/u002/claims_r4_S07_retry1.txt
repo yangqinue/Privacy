@@ -1,0 +1,59 @@
+--- user ---
+You are auditing the USER's messages in one simulated conversation between a user and their personal
+AI assistant. Every statement the user makes has to come from somewhere that was registered before the conversation.
+
+REGISTERED SOURCES (id: content). "profile.*" is the user's profile as of the conversation date, "pref.*" are
+registered preferences, "ctx.*" is the situation of this errand fixed before the conversation:
+- profile.age: age 27 on this date; given name Janice; gender Female
+- profile.marital_partner: marital status Single; no partner at home
+- profile.minor_children: none recorded
+- profile.adult_children: none at home
+- profile.co_residents: mother (age 63), father (age 63), brother (age 20), sister (age 23)
+- profile.job: Warehouse Worker at Edwards Foods LLC; working hours not recorded
+- profile.education: Some College (San Francisco Polytechnic)
+- profile.city: lives in Dallas, TX
+- profile.health: allergies: Peanuts, Tree Nuts
+- profile.life_events: 2017-06 completed Some College at San Francisco Polytechnic (Business); 2022-06 moved to Dallas, TX; 2023-08 started as Warehouse Worker at Edwards Foods LLC
+- pref.schedule: prefers morning activities
+- pref.music: music: R&B, jazz
+- pref.hobbies: hobbies: gardening, video games, fishing
+- pref.diet: diet: no shellfish
+- pref.seating: prefers aisle seats
+- ctx.s1_request: what you want: compare mobile phone plans and pick a cheaper or better one
+- ctx.s2_carrier: your current carrier: Beacon Wireless
+- ctx.s3_plan_data: your current plan's data: 10 GB
+- ctx.s4_usage: how much data you use: about 3 GB a month
+- ctx.s5_bill: your monthly bill: about $170
+- ctx.s6_count: how many lines on the plan: 5 (you and your mother, your father, your brother, your sister)
+- ctx.s7_reason: why: calls drop at home sometimes
+
+USER MESSAGES (Sunday, 22 February 2026):
+[D7:1] Hey, I want to compare mobile phone plans and pick a cheaper or better one. Can you help me with that?
+[D7:3] I use about 3 GB of data a month, and my bill is around $170. Sometimes I get dropped calls at home, so I want to see if there’s a better plan.
+[D7:5] I'm with Beacon Wireless now, and my current plan has 10 GB of data for 5 lines—me, my mom, dad, brother, and sister.
+
+Split the user's messages into the separate things they assert or ask for (facts about themselves or other people,
+details of the errand, requirements and wishes). Skip greetings, thanks, plain questions and plain yes/no answers.
+For each one give:
+- "id": the message id, e.g. "D3:1";
+- "quote": the exact words, copied from that message;
+- "kind", one of:
+    "registered"          – it is stated in, or follows directly from, the registered sources (give their ids);
+    "unregistered_detail" – an ordinary detail or wish for this errand that is not in the registered sources
+                            (a time, an item, a feature, a place, a price limit, a seating wish);
+    "new_identity_fact"   – a fact about who the user is or about the people around them that is not in the
+                            registered sources: age, family or household members, a relative's name, job or working
+                            hours, education, a health condition or diet of the user or of a relative, or an
+                            important life event (move, marriage, divorce, birth, new job, graduation, retirement);
+    "contradiction"       – it contradicts a registered source;
+- "elements": the ids of the registered sources that support it (empty unless kind is "registered");
+- "reason": a few words.
+
+Rules: relationship words that follow from the profile are registered ("my wife", "our kids" for children of any
+age, "my parents"). A number of people that matches the registered participants or household is registered. A
+relative's first name is registered only if it appears in the sources. Asking for something because of a registered
+preference is registered. A diet or health need attributed to another person is a new_identity_fact unless it is in
+the sources. Saying a different date or number than the registered one is a contradiction.
+
+Reply with JSON only:
+{"claims": [{"id": "D3:1", "quote": "...", "kind": "...", "elements": ["..."], "reason": "..."}]}

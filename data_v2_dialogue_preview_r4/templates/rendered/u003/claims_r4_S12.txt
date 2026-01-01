@@ -1,0 +1,60 @@
+--- user ---
+You are auditing the USER's messages in one simulated conversation between a user and their personal
+AI assistant. Every statement the user makes has to come from somewhere that was registered before the conversation.
+
+REGISTERED SOURCES (id: content). "profile.*" is the user's profile as of the conversation date, "pref.*" are
+registered preferences, "ctx.*" is the situation of this errand fixed before the conversation:
+- profile.age: age 42 on this date; given name Eric; gender Male
+- profile.marital_partner: marital status Divorced; no partner at home
+- profile.minor_children: none recorded
+- profile.adult_children: daughter aged 19
+- profile.co_residents: none; 2 people live in the home in total
+- profile.job: Translator at Jones, Gregory and Gibson Public Services Corp; working hours not recorded
+- profile.education: Bachelor (San Diego Institute of Technology)
+- profile.city: lives in Philadelphia, PA
+- profile.health: allergies: none recorded
+- profile.life_events: 2002-07 started as General Laborer at Robles-Hughes Works LLC; 2006-08 started as Bus Driver at Miller-Richardson Agriculture LLC; 2008-06 completed Bachelor at San Diego Institute of Technology (Business Administration); 2014-03 started as Translator at Jones, Gregory and Gibson Public Services Corp; 2015-06 married Janice Hardy; 2019-03 moved to Philadelphia, PA; 2025-12 divorced from Janice Hardy
+- pref.schedule: enjoys late-night events
+- pref.music: music: hip-hop, classic rock
+- pref.hobbies: hobbies: yoga, running, video games
+- pref.diet: diet: gluten-free
+- pref.seating: prefers aisle seats
+- ctx.s1_request: what you want: pick a destination for a short getaway and check transport options
+- ctx.s2_date_from: the day: Friday, 9 October (say the weekday and the day number, e.g. 'Friday, the 9th of October')
+- ctx.s3_date_to: the day: Sunday, 11 October (say the weekday and the day number, e.g. 'Sunday, the 11th of October')
+- ctx.s4_destination: where you are thinking of going: Willow Springs
+- ctx.s5_transport: how you would travel: by train or bus
+- ctx.s6_pref_hobbies: something you would like to do there: running
+- ctx.s7_participants: who is coming besides you: your friend
+- ctx.s8_count: how many travellers: 2
+
+USER MESSAGES (Saturday, 26 September 2026):
+[D12:1] Hey, I'd like to pick a destination for a short getaway from Friday, the 9th of October, to Sunday, the 11th of October. We're two people and would travel by train or bus.
+[D12:3] How about Willow Springs? My friend is coming with me.
+[D12:5] I want to go running there. Let’s check the train or bus options to Willow Springs for this Friday, the 9th, and see how we can get back Sunday, the 11th.
+
+Split the user's messages into the separate things they assert or ask for (facts about themselves or other people,
+details of the errand, requirements and wishes). Skip greetings, thanks, plain questions and plain yes/no answers.
+For each one give:
+- "id": the message id, e.g. "D3:1";
+- "quote": the exact words, copied from that message;
+- "kind", one of:
+    "registered"          – it is stated in, or follows directly from, the registered sources (give their ids);
+    "unregistered_detail" – an ordinary detail or wish for this errand that is not in the registered sources
+                            (a time, an item, a feature, a place, a price limit, a seating wish);
+    "new_identity_fact"   – a fact about who the user is or about the people around them that is not in the
+                            registered sources: age, family or household members, a relative's name, job or working
+                            hours, education, a health condition or diet of the user or of a relative, or an
+                            important life event (move, marriage, divorce, birth, new job, graduation, retirement);
+    "contradiction"       – it contradicts a registered source;
+- "elements": the ids of the registered sources that support it (empty unless kind is "registered");
+- "reason": a few words.
+
+Rules: relationship words that follow from the profile are registered ("my wife", "our kids" for children of any
+age, "my parents"). A number of people that matches the registered participants or household is registered. A
+relative's first name is registered only if it appears in the sources. Asking for something because of a registered
+preference is registered. A diet or health need attributed to another person is a new_identity_fact unless it is in
+the sources. Saying a different date or number than the registered one is a contradiction.
+
+Reply with JSON only:
+{"claims": [{"id": "D3:1", "quote": "...", "kind": "...", "elements": ["..."], "reason": "..."}]}

@@ -1,0 +1,206 @@
+{
+  "persona_id": "u003",
+  "source": {
+    "generator": "ProfileFoundry (GitHub, commit 8239180, Citation License 1.0), US locale",
+    "profile_id": "pf_us_0009150",
+    "household_id": "hh_us_0000915",
+    "reference_date": "2026-10-01"
+  },
+  "fields": {
+    "given_name": {
+      "value": "Eric",
+      "source": "profilefoundry",
+      "basis": "identity.given_name"
+    },
+    "date_of_birth": {
+      "value": "1984-05-30",
+      "source": "profilefoundry",
+      "basis": "identity.dob"
+    },
+    "age": {
+      "value": 42,
+      "source": "derived",
+      "basis": "date of birth vs reference date 2026-10-01"
+    },
+    "age_group": {
+      "value": "35-44",
+      "source": "derived",
+      "basis": "from age"
+    },
+    "gender": {
+      "value": "Male",
+      "source": "profilefoundry",
+      "basis": "identity.gender"
+    },
+    "marital_status": {
+      "value": "Divorced",
+      "source": "profilefoundry",
+      "basis": "identity.marital_status"
+    },
+    "partner_at_home": {
+      "value": false,
+      "source": "derived",
+      "basis": "no spouse link; marital status Divorced"
+    },
+    "own_minor_children": {
+      "value": "unknown",
+      "source": "unknown",
+      "basis": "ProfileFoundry generates adults only; minors are not represented"
+    },
+    "own_adult_children": {
+      "value": [
+        {
+          "profile_id": "pf_us_0009151",
+          "age": 19,
+          "co_resident": true
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "family.children resolved to generated persons"
+    },
+    "co_resident_adults": {
+      "value": [
+        {
+          "profile_id": "pf_us_0009151",
+          "relation": "adult child",
+          "age": 19,
+          "gender": "Female"
+        }
+      ],
+      "source": "derived",
+      "basis": "other members of the same household_id, relation from family links"
+    },
+    "employment": {
+      "value": {
+        "status": "Employed",
+        "job_title": "Translator",
+        "employer": "Jones, Gregory and Gibson Public Services Corp"
+      },
+      "source": "profilefoundry",
+      "basis": "employment record with valid_to = null"
+    },
+    "education": {
+      "value": {
+        "degree": "Bachelor",
+        "institution": "San Diego Institute of Technology"
+      },
+      "source": "profilefoundry",
+      "basis": "highest degree in education records"
+    },
+    "personal_income_usd": {
+      "value": 66205,
+      "source": "profilefoundry",
+      "basis": "finance.annual_income; 0 with empty finance_status treated as not recorded"
+    },
+    "household_income": {
+      "value": {
+        "status": "incomplete",
+        "recorded_sum_usd": 66205,
+        "members_without_recorded_income": 1,
+        "members": 2
+      },
+      "source": "unknown",
+      "basis": "at least one adult member has no recorded income; no bracket is assigned"
+    },
+    "city": {
+      "value": "Philadelphia, PA",
+      "source": "profilefoundry",
+      "basis": "address with valid_to = null"
+    },
+    "health": {
+      "value": {
+        "allergies": [],
+        "disability": null
+      },
+      "source": "profilefoundry",
+      "basis": "health.allergies / health.disability_status"
+    },
+    "life_events": {
+      "value": [
+        {
+          "date": "2002-07-05",
+          "type": "job_change",
+          "text": "started as General Laborer at Robles-Hughes Works LLC"
+        },
+        {
+          "date": "2006-08-14",
+          "type": "job_change",
+          "text": "started as Bus Driver at Miller-Richardson Agriculture LLC"
+        },
+        {
+          "date": "2008-06-19",
+          "type": "education",
+          "text": "completed Bachelor at San Diego Institute of Technology (Business Administration)"
+        },
+        {
+          "date": "2014-03-04",
+          "type": "job_change",
+          "text": "started as Translator at Jones, Gregory and Gibson Public Services Corp"
+        },
+        {
+          "date": "2015-06-28",
+          "type": "marriage",
+          "text": "married Janice Hardy"
+        },
+        {
+          "date": "2019-03-16",
+          "type": "move",
+          "text": "moved to Philadelphia, PA"
+        },
+        {
+          "date": "2025-12-10",
+          "type": "divorce",
+          "text": "divorced from Janice Hardy"
+        }
+      ],
+      "source": "profilefoundry",
+      "basis": "events (moves, education, job changes, marriage, divorce)"
+    },
+    "preferences": {
+      "value": {
+        "schedule": "enjoys late-night events",
+        "music": [
+          "hip-hop",
+          "classic rock"
+        ],
+        "hobbies": [
+          "yoga",
+          "running",
+          "video games"
+        ],
+        "diet": "gluten-free",
+        "seating": "prefers aisle seats"
+      },
+      "source": "synthetic",
+      "basis": "sampled independently of age and all target attributes (v1 lists)"
+    }
+  },
+  "income_bracket_for_scoring": null,
+  "checks": [
+    {
+      "check": "age matches date of birth at 2026-10-01",
+      "ok": true,
+      "detail": "age 42"
+    },
+    {
+      "check": "all events on or after birth",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "no event after the reference date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "last move matches current address",
+      "ok": true,
+      "detail": "moved to Philadelphia, PA vs Philadelphia"
+    },
+    {
+      "check": "current job start not after reference date",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

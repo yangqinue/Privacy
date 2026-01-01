@@ -1,0 +1,58 @@
+--- user ---
+You are auditing the USER's messages in one simulated conversation between a user and their personal
+AI assistant. Every statement the user makes has to come from somewhere that was registered before the conversation.
+
+REGISTERED SOURCES (id: content). "profile.*" is the user's profile as of the conversation date, "pref.*" are
+registered preferences, "ctx.*" is the situation of this errand fixed before the conversation:
+- profile.age: age 20 on this date; given name Stephanie; gender Female
+- profile.marital_partner: marital status Single; no partner at home
+- profile.minor_children: none recorded
+- profile.adult_children: none at home
+- profile.co_residents: father (age 58), mother (age 55), brother (age 28), sister (age 24)
+- profile.job: Mechanic at Perkins-Hubbard Industries Corp; working hours not recorded
+- profile.education: Associate (Sawyer College)
+- profile.city: lives in Charleston, WV
+- profile.health: allergies: none recorded
+- profile.life_events: 2020-03 moved to Charleston, WV; 2024-06 completed Associate at Sawyer College (Automotive Technology); 2025-05 started as Mechanic at Perkins-Hubbard Industries Corp
+- pref.schedule: prefers morning activities
+- pref.music: music: K-pop, classical
+- pref.hobbies: hobbies: hiking, photography, cycling
+- pref.diet: diet: vegetarian
+- pref.seating: prefers seated venues over standing
+- ctx.s1_request: what you want: ask which upcoming concerts in town would suit them and hold seats
+- ctx.s2_date: the day: Sunday, 23 November (say the weekday and the day number, e.g. 'Sunday, the 23rd of November')
+- ctx.s3_pref_seating: seating: you prefer seated venues over standing
+- ctx.s4_pref_schedule: a time preference: you prefer morning activities
+- ctx.s5_participants: who is coming besides you: your father, your mother, your brother, your sister
+- ctx.s6_count: how many tickets: 5
+
+USER MESSAGES (Saturday, 15 November 2025):
+[D4:1] Hey, I'm looking for upcoming concerts in town on Sunday, the 23rd of November. Could you find ones that would suit me and hold some seats?
+[D4:3] I need 5 tickets and prefer seated venues over standing.
+[D4:5] We prefer morning activities, and the others coming are my dad, mom, brother, and sister.
+
+Split the user's messages into the separate things they assert or ask for (facts about themselves or other people,
+details of the errand, requirements and wishes). Skip greetings, thanks, plain questions and plain yes/no answers.
+For each one give:
+- "id": the message id, e.g. "D3:1";
+- "quote": the exact words, copied from that message;
+- "kind", one of:
+    "registered"          – it is stated in, or follows directly from, the registered sources (give their ids);
+    "unregistered_detail" – an ordinary detail or wish for this errand that is not in the registered sources
+                            (a time, an item, a feature, a place, a price limit, a seating wish);
+    "new_identity_fact"   – a fact about who the user is or about the people around them that is not in the
+                            registered sources: age, family or household members, a relative's name, job or working
+                            hours, education, a health condition or diet of the user or of a relative, or an
+                            important life event (move, marriage, divorce, birth, new job, graduation, retirement);
+    "contradiction"       – it contradicts a registered source;
+- "elements": the ids of the registered sources that support it (empty unless kind is "registered");
+- "reason": a few words.
+
+Rules: relationship words that follow from the profile are registered ("my wife", "our kids" for children of any
+age, "my parents"). A number of people that matches the registered participants or household is registered. A
+relative's first name is registered only if it appears in the sources. Asking for something because of a registered
+preference is registered. A diet or health need attributed to another person is a new_identity_fact unless it is in
+the sources. Saying a different date or number than the registered one is a contradiction.
+
+Reply with JSON only:
+{"claims": [{"id": "D3:1", "quote": "...", "kind": "...", "elements": ["..."], "reason": "..."}]}

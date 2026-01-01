@@ -1,0 +1,59 @@
+--- user ---
+You are auditing the USER's messages in one simulated conversation between a user and their personal
+AI assistant. Every statement the user makes has to come from somewhere that was registered before the conversation.
+
+REGISTERED SOURCES (id: content). "profile.*" is the user's profile as of the conversation date, "pref.*" are
+registered preferences, "ctx.*" is the situation of this errand fixed before the conversation:
+- profile.age: age 51 on this date; given name Brandon; gender Male
+- profile.marital_partner: marital status Married; wife lives in the same home (name: Cassidy Dillon)
+- profile.minor_children: none recorded
+- profile.adult_children: son aged 27, son aged 24, son aged 18, daughter aged 21
+- profile.co_residents: none; 6 people live in the home in total
+- profile.job: unknown
+- profile.education: Master (Clark University)
+- profile.city: lives in New York, NY
+- profile.health: allergies: none recorded
+- profile.life_events: 1991-06 moved to Nashville, TN; 1998-06 completed Master at Clark University (Social Work); 1998-10 married Cassidy Dillon; 2015-10 moved to New York, NY
+- pref.schedule: enjoys late-night events
+- pref.music: music: R&B, video game soundtracks
+- pref.hobbies: hobbies: reading, woodworking, rock climbing
+- pref.diet: diet: no restrictions
+- pref.seating: prefers aisle seats
+- ctx.s1_request: what you want: move an existing dinner reservation to a different time
+- ctx.s2_participants: who is coming besides you: your wife, your son, your son, your son, your daughter
+- ctx.s3_venue: the restaurant where you have a reservation: Marigold Diner
+- ctx.s4_date: the day: Saturday, 6 December (say the weekday and the day number, e.g. 'this Saturday, the 6th')
+- ctx.s5_time: the time of the reservation now: about 6:30 pm
+- ctx.s6_time: the new time you want: about 7:30 pm
+- ctx.s7_count: how many people: 6
+
+USER MESSAGES (Thursday, 4 December 2025):
+[D6:1] I want to move an existing dinner reservation to a different time. It's this Saturday, the 6th.
+[D6:3] It’s for my wife, my son, my son, my son, and my daughter — that’s six people total. The restaurant is Marigold Diner on this Saturday, the 6th.
+[D6:5] The reservation is for about 6:30 pm right now, but I’d like to move it to about 7:30 pm this Saturday, the 6th.
+
+Split the user's messages into the separate things they assert or ask for (facts about themselves or other people,
+details of the errand, requirements and wishes). Skip greetings, thanks, plain questions and plain yes/no answers.
+For each one give:
+- "id": the message id, e.g. "D3:1";
+- "quote": the exact words, copied from that message;
+- "kind", one of:
+    "registered"          – it is stated in, or follows directly from, the registered sources (give their ids);
+    "unregistered_detail" – an ordinary detail or wish for this errand that is not in the registered sources
+                            (a time, an item, a feature, a place, a price limit, a seating wish);
+    "new_identity_fact"   – a fact about who the user is or about the people around them that is not in the
+                            registered sources: age, family or household members, a relative's name, job or working
+                            hours, education, a health condition or diet of the user or of a relative, or an
+                            important life event (move, marriage, divorce, birth, new job, graduation, retirement);
+    "contradiction"       – it contradicts a registered source;
+- "elements": the ids of the registered sources that support it (empty unless kind is "registered");
+- "reason": a few words.
+
+Rules: relationship words that follow from the profile are registered ("my wife", "our kids" for children of any
+age, "my parents"). A number of people that matches the registered participants or household is registered. A
+relative's first name is registered only if it appears in the sources. Asking for something because of a registered
+preference is registered. A diet or health need attributed to another person is a new_identity_fact unless it is in
+the sources. Saying a different date or number than the registered one is a contradiction.
+
+Reply with JSON only:
+{"claims": [{"id": "D3:1", "quote": "...", "kind": "...", "elements": ["..."], "reason": "..."}]}

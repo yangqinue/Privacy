@@ -1,0 +1,58 @@
+--- user ---
+You are auditing the USER's messages in one simulated conversation between a user and their personal
+AI assistant. Every statement the user makes has to come from somewhere that was registered before the conversation.
+
+REGISTERED SOURCES (id: content). "profile.*" is the user's profile as of the conversation date, "pref.*" are
+registered preferences, "ctx.*" is the situation of this errand fixed before the conversation:
+- profile.age: age 41 on this date; given name Eric; gender Male
+- profile.marital_partner: marital status Divorced; no partner at home
+- profile.minor_children: none recorded
+- profile.adult_children: daughter aged 19
+- profile.co_residents: none; 2 people live in the home in total
+- profile.job: Translator at Jones, Gregory and Gibson Public Services Corp; working hours not recorded
+- profile.education: Bachelor (San Diego Institute of Technology)
+- profile.city: lives in Philadelphia, PA
+- profile.health: allergies: none recorded
+- profile.life_events: 2002-07 started as General Laborer at Robles-Hughes Works LLC; 2006-08 started as Bus Driver at Miller-Richardson Agriculture LLC; 2008-06 completed Bachelor at San Diego Institute of Technology (Business Administration); 2014-03 started as Translator at Jones, Gregory and Gibson Public Services Corp; 2015-06 married Janice Hardy; 2019-03 moved to Philadelphia, PA; 2025-12 divorced from Janice Hardy
+- pref.schedule: enjoys late-night events
+- pref.music: music: hip-hop, classic rock
+- pref.hobbies: hobbies: yoga, running, video games
+- pref.diet: diet: gluten-free
+- pref.seating: prefers aisle seats
+- ctx.s1_request: what you want: sign up for a fitness class or a class pack at a local gym
+- ctx.s2_class: the class you want to try: swimming
+- ctx.s3_venue: the gym: Corner Street Pilates
+- ctx.s4_date1: the day: Saturday, 14 February (say the weekday and the day number, e.g. 'this Saturday, the 14th')
+- ctx.s5_date2: the day: Wednesday, 18 February (say the weekday and the day number, e.g. 'this Wednesday, the 18th')
+- ctx.s6_pref_schedule: a time preference: you enjoy late-night events
+
+USER MESSAGES (Thursday, 12 February 2026):
+[D6:1] I want to sign up for a fitness class or a class pack at a local gym. I'm available this Saturday, the 14th, and this Wednesday, the 18th.
+[D6:3] Corner Street Pilates, please. I want to try swimming on this Saturday, the 14th.
+[D6:5] I’d prefer a late-night session if possible. How does 7:30 pm work?
+
+Split the user's messages into the separate things they assert or ask for (facts about themselves or other people,
+details of the errand, requirements and wishes). Skip greetings, thanks, plain questions and plain yes/no answers.
+For each one give:
+- "id": the message id, e.g. "D3:1";
+- "quote": the exact words, copied from that message;
+- "kind", one of:
+    "registered"          – it is stated in, or follows directly from, the registered sources (give their ids);
+    "unregistered_detail" – an ordinary detail or wish for this errand that is not in the registered sources
+                            (a time, an item, a feature, a place, a price limit, a seating wish);
+    "new_identity_fact"   – a fact about who the user is or about the people around them that is not in the
+                            registered sources: age, family or household members, a relative's name, job or working
+                            hours, education, a health condition or diet of the user or of a relative, or an
+                            important life event (move, marriage, divorce, birth, new job, graduation, retirement);
+    "contradiction"       – it contradicts a registered source;
+- "elements": the ids of the registered sources that support it (empty unless kind is "registered");
+- "reason": a few words.
+
+Rules: relationship words that follow from the profile are registered ("my wife", "our kids" for children of any
+age, "my parents"). A number of people that matches the registered participants or household is registered. A
+relative's first name is registered only if it appears in the sources. Asking for something because of a registered
+preference is registered. A diet or health need attributed to another person is a new_identity_fact unless it is in
+the sources. Saying a different date or number than the registered one is a contradiction.
+
+Reply with JSON only:
+{"claims": [{"id": "D3:1", "quote": "...", "kind": "...", "elements": ["..."], "reason": "..."}]}

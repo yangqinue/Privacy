@@ -1,0 +1,2573 @@
+{
+  "persona_id": "u005",
+  "planned": 12,
+  "kept": [
+    {
+      "session_id": "S01",
+      "date": "2025-10-07",
+      "date_text": "7 October, 2025",
+      "activity": "concert_ticket_booking",
+      "errand": "change the seats or date of a concert booking they are considering",
+      "slots": [
+        {
+          "id": "s1",
+          "key": "request",
+          "value": "change the seats or date of a concert booking they are considering",
+          "say": "what you want: change the seats or date of a concert booking they are considering",
+          "nodes": [
+            "session:S01"
+          ],
+          "need": []
+        },
+        {
+          "id": "s2",
+          "key": "venue",
+          "value": "The Blue Door",
+          "say": "the venue of the show you hold seats for: The Blue Door",
+          "nodes": [
+            "catalog:concerts:c4"
+          ],
+          "need": [
+            "Blue\\ Door"
+          ]
+        },
+        {
+          "id": "s3",
+          "key": "date_held",
+          "value": "2025-10-12",
+          "say": "the day: Sunday, 12 October (say the weekday and the day number, e.g. 'this Sunday, the 12th')",
+          "nodes": [
+            "session:S01"
+          ],
+          "need": [
+            "\\b12(?:st|nd|rd|th)?\\b",
+            "\\b(Sunday|Sun|October|Oct)\\b"
+          ]
+        },
+        {
+          "id": "s4",
+          "key": "date_wanted",
+          "value": "2025-10-24",
+          "say": "the day: Friday, 24 October (say the weekday and the day number, e.g. 'Friday, the 24th of October')",
+          "nodes": [
+            "session:S01"
+          ],
+          "need": [
+            "\\b24(?:st|nd|rd|th)?\\b",
+            "\\b(Friday|Fri|October|Oct)\\b"
+          ]
+        },
+        {
+          "id": "s5",
+          "key": "participants",
+          "value": "friend",
+          "say": "who is coming besides you: your friend",
+          "nodes": [
+            "person:friend"
+          ],
+          "need": [
+            "\\b(friend)s?\\b"
+          ]
+        },
+        {
+          "id": "s6",
+          "key": "count",
+          "value": 2,
+          "say": "how many tickets: 2",
+          "nodes": [
+            "person:self",
+            "person:friend"
+          ],
+          "need": [
+            "\\b2\\b|\\btwo\\b|couple|both of us|the two of us|pair"
+          ],
+          "what": "tickets"
+        }
+      ],
+      "plan": [
+        {
+          "speaker": "User",
+          "slots": [
+            "s1",
+            "s3",
+            "s4",
+            "s2"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user how many tickets it is for",
+          "asks": "s6"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s6",
+            "s5"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "say briefly what you will look for, using only details the user gave"
+        }
+      ],
+      "turns": [
+        {
+          "dia_id": "D1:1",
+          "speaker": "User",
+          "text": "I want to change the seats or the date of my concert booking at The Blue Door. I have tickets for this Sunday, the 12th, but I'm considering Friday, the 24th of October instead.",
+          "slots": [
+            "s1",
+            "s3",
+            "s4",
+            "s2"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D1:2",
+          "speaker": "Assistant",
+          "text": "I understand you're considering changing your concert booking at The Blue Door from Sunday, the 12th to Friday, the 24th of October. How many tickets are you looking to change?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user how many tickets it is for",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D1:3",
+          "speaker": "User",
+          "text": "It’s just me and my friend. We want to change two tickets.",
+          "slots": [
+            "s6",
+            "s5"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D1:4",
+          "speaker": "Assistant",
+          "text": "I’ll look for available seats for two people at The Blue Door on Friday, the 24th of October.",
+          "slots": [],
+          "act": "say briefly what you will look for, using only details the user gave",
+          "attempts": 1
+        }
+      ],
+      "llm_audit": {
+        "status": "ok",
+        "problems": [],
+        "claims": [
+          {
+            "cid": "c1",
+            "dia_id": "D1:1",
+            "quote": "I want to change the seats or the date of my concert booking at The Blue Door. I have tickets for this Sunday, the 12th, but I'm considering Friday, the 24th of October instead.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s1_request",
+              "ctx.s2_venue",
+              "ctx.s3_date_held",
+              "ctx.s4_date_wanted"
+            ],
+            "reason": "Matches registered errand context (venue, dates, request type)"
+          },
+          {
+            "cid": "c2",
+            "dia_id": "D1:3",
+            "quote": "It’s just me and my friend. We want to change two tickets.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s5_participants",
+              "ctx.s6_count"
+            ],
+            "reason": "Matches registered participant count and companion description"
+          }
+        ]
+      }
+    },
+    {
+      "session_id": "S02",
+      "date": "2025-10-08",
+      "date_text": "8 October, 2025",
+      "activity": "fitness_class_booking",
+      "errand": "sign up for a fitness class or a class pack at a local gym",
+      "slots": [
+        {
+          "id": "s1",
+          "key": "request",
+          "value": "sign up for a fitness class or a class pack at a local gym",
+          "say": "what you want: sign up for a fitness class or a class pack at a local gym",
+          "nodes": [
+            "session:S02"
+          ],
+          "need": []
+        },
+        {
+          "id": "s2",
+          "key": "class",
+          "value": "yoga",
+          "say": "the class you want to try: yoga",
+          "nodes": [
+            "session:S02"
+          ],
+          "need": [
+            "yoga"
+          ]
+        },
+        {
+          "id": "s3",
+          "key": "venue",
+          "value": "Lakeview Athletic Club",
+          "say": "the gym: Lakeview Athletic Club",
+          "nodes": [
+            "catalog:gyms:g1"
+          ],
+          "need": [
+            "Lakeview"
+          ]
+        },
+        {
+          "id": "s4",
+          "key": "date1",
+          "value": "2025-10-11",
+          "say": "the day: Saturday, 11 October (say the weekday and the day number, e.g. 'this Saturday, the 11th')",
+          "nodes": [
+            "session:S02"
+          ],
+          "need": [
+            "\\b11(?:st|nd|rd|th)?\\b",
+            "\\b(Saturday|Sat|October|Oct)\\b"
+          ]
+        },
+        {
+          "id": "s5",
+          "key": "date2",
+          "value": "2025-10-15",
+          "say": "the day: Wednesday, 15 October (say the weekday and the day number, e.g. 'Wednesday, the 15th of October')",
+          "nodes": [
+            "session:S02"
+          ],
+          "need": [
+            "\\b15(?:st|nd|rd|th)?\\b",
+            "\\b(Wednesday|Wed|October|Oct)\\b"
+          ]
+        },
+        {
+          "id": "s6",
+          "key": "pref_schedule",
+          "value": "prefers morning activities",
+          "say": "a time preference: you prefer morning activities",
+          "nodes": [
+            "pref:schedule"
+          ],
+          "need": [
+            "morning"
+          ]
+        },
+        {
+          "id": "s7",
+          "key": "participants",
+          "value": "friend",
+          "say": "who is coming besides you: your friend",
+          "nodes": [
+            "person:friend"
+          ],
+          "need": [
+            "\\b(friend)s?\\b"
+          ]
+        }
+      ],
+      "plan": [
+        {
+          "speaker": "User",
+          "slots": [
+            "s1",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user about a time preference",
+          "asks": "s6"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s6",
+            "s3"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user which class they want",
+          "asks": "s2"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s2",
+            "s7"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "say briefly what you will look for, using only details the user gave"
+        }
+      ],
+      "turns": [
+        {
+          "dia_id": "D2:1",
+          "speaker": "User",
+          "text": "I want to sign up for a fitness class or a class pack at a local gym. This Saturday, the 11th, and Wednesday, the 15th of October.",
+          "slots": [
+            "s1",
+            "s4",
+            "s5"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D2:2",
+          "speaker": "Assistant",
+          "text": "Got it. Are there specific times during Saturday, the 11th, or Wednesday, the 15th that work best for you?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user about a time preference",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D2:3",
+          "speaker": "User",
+          "text": "I want to sign up for a class at Lakeview Athletic Club. This Saturday, the 11th, and Wednesday, the 15th, in the morning.",
+          "slots": [
+            "s6",
+            "s3"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D2:4",
+          "speaker": "Assistant",
+          "text": "Understood — you want to sign up for a class at Lakeview Athletic Club on Saturday, the 11th, and Wednesday, the 15th, in the morning. Which class would you like to join?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user which class they want",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D2:5",
+          "speaker": "User",
+          "text": "I want to try the yoga class this Saturday, the 11th, and Wednesday, the 15th in the morning. My friend is coming too.",
+          "slots": [
+            "s2",
+            "s7"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D2:6",
+          "speaker": "Assistant",
+          "text": "I’ll look for a morning yoga class at Lakeview Athletic Club on Saturday, the 11th, and Wednesday, the 15th, for you and your friend.",
+          "slots": [],
+          "act": "say briefly what you will look for, using only details the user gave",
+          "attempts": 1
+        }
+      ],
+      "llm_audit": {
+        "status": "ok",
+        "problems": [],
+        "claims": [
+          {
+            "cid": "c1",
+            "dia_id": "D2:1",
+            "quote": "I want to sign up for a fitness class or a class pack at a local gym. This Saturday, the 11th, and Wednesday, the 15th of October.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s1_request",
+              "ctx.s4_date1",
+              "ctx.s5_date2"
+            ],
+            "reason": "Matches registered errand request and dates"
+          },
+          {
+            "cid": "c2",
+            "dia_id": "D2:3",
+            "quote": "I want to sign up for a class at Lakeview Athletic Club. This Saturday, the 11th, and Wednesday, the 15th, in the morning.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s3_venue",
+              "ctx.s4_date1",
+              "ctx.s5_date2",
+              "ctx.s6_pref_schedule"
+            ],
+            "reason": "Matches registered venue, dates, and morning preference"
+          },
+          {
+            "cid": "c3",
+            "dia_id": "D2:5",
+            "quote": "I want to try the yoga class this Saturday, the 11th, and Wednesday, the 15th in the morning. My friend is coming too.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s2_class",
+              "ctx.s4_date1",
+              "ctx.s5_date2",
+              "ctx.s6_pref_schedule",
+              "ctx.s7_participants"
+            ],
+            "reason": "Matches registered class, dates, time preference, and participant"
+          }
+        ]
+      }
+    },
+    {
+      "session_id": "S03",
+      "date": "2025-12-08",
+      "date_text": "8 December, 2025",
+      "activity": "weekend_trip_booking",
+      "errand": "pick a destination for a short getaway and check transport options",
+      "slots": [
+        {
+          "id": "s1",
+          "key": "request",
+          "value": "pick a destination for a short getaway and check transport options",
+          "say": "what you want: pick a destination for a short getaway and check transport options",
+          "nodes": [
+            "session:S03"
+          ],
+          "need": []
+        },
+        {
+          "id": "s2",
+          "key": "date_from",
+          "value": "2025-12-19",
+          "say": "the day: Friday, 19 December (say the weekday and the day number, e.g. 'Friday, the 19th of December')",
+          "nodes": [
+            "session:S03"
+          ],
+          "need": [
+            "\\b19(?:st|nd|rd|th)?\\b",
+            "\\b(Friday|Fri|December|Dec)\\b"
+          ]
+        },
+        {
+          "id": "s3",
+          "key": "date_to",
+          "value": "2025-12-21",
+          "say": "the day: Sunday, 21 December (say the weekday and the day number, e.g. 'Sunday, the 21st of December')",
+          "nodes": [
+            "session:S03"
+          ],
+          "need": [
+            "\\b21(?:st|nd|rd|th)?\\b",
+            "\\b(Sunday|Sun|December|Dec)\\b"
+          ]
+        },
+        {
+          "id": "s4",
+          "key": "transport",
+          "value": "drive",
+          "say": "how you would travel: by car",
+          "nodes": [
+            "session:S03"
+          ],
+          "need": [
+            "driv|car"
+          ]
+        },
+        {
+          "id": "s5",
+          "key": "pref_hobbies",
+          "value": [
+            "hiking",
+            "rock climbing",
+            "fishing"
+          ],
+          "say": "something you would like to do there: fishing",
+          "nodes": [
+            "pref:hobbies"
+          ],
+          "need": [
+            "fishi"
+          ]
+        },
+        {
+          "id": "s6",
+          "key": "count",
+          "value": 1,
+          "say": "how many travellers: 1",
+          "nodes": [
+            "person:self"
+          ],
+          "need": [
+            "\\b1\\b|\\bone\\b|just me|by myself|alone|myself|solo|single|only me|on my own"
+          ],
+          "what": "travellers"
+        }
+      ],
+      "plan": [
+        {
+          "speaker": "User",
+          "slots": [
+            "s1",
+            "s2",
+            "s3",
+            "s6"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user about something you would like to do there",
+          "asks": "s5"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s5",
+            "s4"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "say briefly what you will look for, using only details the user gave"
+        }
+      ],
+      "turns": [
+        {
+          "dia_id": "D3:1",
+          "speaker": "User",
+          "text": "Hey, I want to plan a short getaway from Friday, the 19th of December, to Sunday, the 21st. Can you pick a good destination and check transport options for one person?",
+          "slots": [
+            "s1",
+            "s2",
+            "s3",
+            "s6"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D3:2",
+          "speaker": "Assistant",
+          "text": "Got it—you want a short getaway from Friday, the 19th of December, to Sunday, the 21st. What kind of activities would you like to do at your destination?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user about something you would like to do there",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D3:3",
+          "speaker": "User",
+          "text": "I want to drive there and spend some time fishing.",
+          "slots": [
+            "s5",
+            "s4"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D3:4",
+          "speaker": "Assistant",
+          "text": "I'll look for a good destination for fishing within driving distance and check transport options for a car trip from the 19th to the 21st of December.",
+          "slots": [],
+          "act": "say briefly what you will look for, using only details the user gave",
+          "attempts": 1
+        }
+      ],
+      "llm_audit": {
+        "status": "ok",
+        "problems": [],
+        "claims": [
+          {
+            "cid": "c1",
+            "dia_id": "D3:1",
+            "quote": "plan a short getaway from Friday, the 19th of December, to Sunday, the 21st",
+            "kind": "registered",
+            "elements": [
+              "ctx.s2_date_from",
+              "ctx.s3_date_to"
+            ],
+            "reason": "dates match registered context"
+          },
+          {
+            "cid": "c2",
+            "dia_id": "D3:1",
+            "quote": "for one person",
+            "kind": "registered",
+            "elements": [
+              "ctx.s6_count"
+            ],
+            "reason": "number of travelers matches registered context"
+          },
+          {
+            "cid": "c3",
+            "dia_id": "D3:3",
+            "quote": "drive there",
+            "kind": "registered",
+            "elements": [
+              "ctx.s4_transport"
+            ],
+            "reason": "transport method matches registered context"
+          },
+          {
+            "cid": "c4",
+            "dia_id": "D3:3",
+            "quote": "spend some time fishing",
+            "kind": "registered",
+            "elements": [
+              "ctx.s5_pref_hobbies"
+            ],
+            "reason": "activity matches registered context"
+          }
+        ]
+      }
+    },
+    {
+      "session_id": "S04",
+      "date": "2026-01-16",
+      "date_text": "16 January, 2026",
+      "activity": "weekend_trip_booking",
+      "errand": "pick a destination for a short getaway and check transport options",
+      "slots": [
+        {
+          "id": "s1",
+          "key": "request",
+          "value": "pick a destination for a short getaway and check transport options",
+          "say": "what you want: pick a destination for a short getaway and check transport options",
+          "nodes": [
+            "session:S04"
+          ],
+          "need": []
+        },
+        {
+          "id": "s2",
+          "key": "date_from",
+          "value": "2026-01-23",
+          "say": "the day: Friday, 23 January (say the weekday and the day number, e.g. 'Friday, the 23rd of January')",
+          "nodes": [
+            "session:S04"
+          ],
+          "need": [
+            "\\b23(?:st|nd|rd|th)?\\b",
+            "\\b(Friday|Fri|January|Jan)\\b"
+          ]
+        },
+        {
+          "id": "s3",
+          "key": "date_to",
+          "value": "2026-01-25",
+          "say": "the day: Sunday, 25 January (say the weekday and the day number, e.g. 'Sunday, the 25th of January')",
+          "nodes": [
+            "session:S04"
+          ],
+          "need": [
+            "\\b25(?:st|nd|rd|th)?\\b",
+            "\\b(Sunday|Sun|January|Jan)\\b"
+          ]
+        },
+        {
+          "id": "s4",
+          "key": "transport",
+          "value": "train or bus",
+          "say": "how you would travel: by train or bus",
+          "nodes": [
+            "session:S04"
+          ],
+          "need": [
+            "train|bus"
+          ]
+        },
+        {
+          "id": "s5",
+          "key": "pref_hobbies",
+          "value": [
+            "hiking",
+            "rock climbing",
+            "fishing"
+          ],
+          "say": "something you would like to do there: rock climbing",
+          "nodes": [
+            "pref:hobbies"
+          ],
+          "need": [
+            "rock"
+          ]
+        },
+        {
+          "id": "s6",
+          "key": "participants",
+          "value": "friend",
+          "say": "who is coming besides you: your friend",
+          "nodes": [
+            "person:friend"
+          ],
+          "need": [
+            "\\b(friend)s?\\b"
+          ]
+        },
+        {
+          "id": "s7",
+          "key": "count",
+          "value": 2,
+          "say": "how many travellers: 2",
+          "nodes": [
+            "person:self",
+            "person:friend"
+          ],
+          "need": [
+            "\\b2\\b|\\btwo\\b|couple|both of us|the two of us|pair"
+          ],
+          "what": "travellers"
+        }
+      ],
+      "plan": [
+        {
+          "speaker": "User",
+          "slots": [
+            "s1",
+            "s2",
+            "s3",
+            "s6"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user how many travellers it is for",
+          "asks": "s7"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s7",
+            "s4"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user about something you would like to do there",
+          "asks": "s5"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s5"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "say briefly what you will look for, using only details the user gave"
+        }
+      ],
+      "turns": [
+        {
+          "dia_id": "D4:1",
+          "speaker": "User",
+          "text": "Hey, I want to plan a short getaway from Friday, the 23rd of January, to Sunday, the 25th. Just me and my friend. Can you pick a destination and check the transport options?",
+          "slots": [
+            "s1",
+            "s2",
+            "s3",
+            "s6"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D4:2",
+          "speaker": "Assistant",
+          "text": "Sure, you're planning a short getaway from Friday, the 23rd of January, to Sunday, the 25th. How many travellers will be going?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user how many travellers it is for",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D4:3",
+          "speaker": "User",
+          "text": "Just me and one friend, so two travellers. We’d like to go by train or bus.",
+          "slots": [
+            "s7",
+            "s4"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D4:4",
+          "speaker": "Assistant",
+          "text": "Got it—two travellers, departing by train or bus. What kind of activities would you like to do at your destination?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user about something you would like to do there",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D4:5",
+          "speaker": "User",
+          "text": "We want to go rock climbing there.",
+          "slots": [
+            "s5"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D4:6",
+          "speaker": "Assistant",
+          "text": "I’ll look for a destination near rock climbing spots that you can reach by train or bus, starting on the 23rd of January.",
+          "slots": [],
+          "act": "say briefly what you will look for, using only details the user gave",
+          "attempts": 1
+        }
+      ],
+      "llm_audit": {
+        "status": "not_ok",
+        "problems": [
+          {
+            "type": "new_identity_fact",
+            "quote": "I want to plan a short getaway from Friday, the 23rd of January, to Sunday, the 25th. Just me and my friend.",
+            "source": "llm-audit",
+            "reason": "D4:1: Dates match context, participants and count match context but 'friend' is new_identity_fact"
+          }
+        ],
+        "claims": [
+          {
+            "cid": "c1",
+            "dia_id": "D4:1",
+            "quote": "I want to plan a short getaway from Friday, the 23rd of January, to Sunday, the 25th. Just me and my friend.",
+            "kind": "new_identity_fact",
+            "elements": [],
+            "reason": "Dates match context, participants and count match context but 'friend' is new_identity_fact"
+          },
+          {
+            "cid": "c2",
+            "dia_id": "D4:3",
+            "quote": "Just me and one friend, so two travellers. We’d like to go by train or bus.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s4_transport",
+              "ctx.s7_count"
+            ],
+            "reason": "Transport method and traveller count match registered context"
+          },
+          {
+            "cid": "c3",
+            "dia_id": "D4:5",
+            "quote": "We want to go rock climbing there.",
+            "kind": "registered",
+            "elements": [
+              "pref.hobbies"
+            ],
+            "reason": "Rock climbing is listed in registered hobbies"
+          }
+        ]
+      }
+    },
+    {
+      "session_id": "S05",
+      "date": "2026-02-04",
+      "date_text": "4 February, 2026",
+      "activity": "fitness_class_booking",
+      "errand": "find a class time that fits their week and book a trial session",
+      "slots": [
+        {
+          "id": "s1",
+          "key": "request",
+          "value": "find a class time that fits their week and book a trial session",
+          "say": "what you want: find a class time that fits their week and book a trial session",
+          "nodes": [
+            "session:S05"
+          ],
+          "need": []
+        },
+        {
+          "id": "s2",
+          "key": "class",
+          "value": "indoor climbing",
+          "say": "the class you want to try: indoor climbing",
+          "nodes": [
+            "session:S05"
+          ],
+          "need": [
+            "climbing"
+          ]
+        },
+        {
+          "id": "s3",
+          "key": "date1",
+          "value": "2026-02-11",
+          "say": "the day: Wednesday, 11 February (say the weekday and the day number, e.g. 'Wednesday, the 11th of February')",
+          "nodes": [
+            "session:S05"
+          ],
+          "need": [
+            "\\b11(?:st|nd|rd|th)?\\b",
+            "\\b(Wednesday|Wed|February|Feb)\\b"
+          ]
+        },
+        {
+          "id": "s4",
+          "key": "date2",
+          "value": "2026-02-15",
+          "say": "the day: Sunday, 15 February (say the weekday and the day number, e.g. 'Sunday, the 15th of February')",
+          "nodes": [
+            "session:S05"
+          ],
+          "need": [
+            "\\b15(?:st|nd|rd|th)?\\b",
+            "\\b(Sunday|Sun|February|Feb)\\b"
+          ]
+        },
+        {
+          "id": "s5",
+          "key": "pref_schedule",
+          "value": "prefers morning activities",
+          "say": "a time preference: you prefer morning activities",
+          "nodes": [
+            "pref:schedule"
+          ],
+          "need": [
+            "morning"
+          ]
+        },
+        {
+          "id": "s6",
+          "key": "participants",
+          "value": "friend",
+          "say": "who is coming besides you: your friend",
+          "nodes": [
+            "person:friend"
+          ],
+          "need": [
+            "\\b(friend)s?\\b"
+          ]
+        }
+      ],
+      "plan": [
+        {
+          "speaker": "User",
+          "slots": [
+            "s1",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user which class they want",
+          "asks": "s2"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user who is coming",
+          "asks": "s6"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s6"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "say briefly what you will look for, using only details the user gave"
+        }
+      ],
+      "turns": [
+        {
+          "dia_id": "D5:1",
+          "speaker": "User",
+          "text": "Hi, I want to find a class time that fits their week and book a trial session. Let me know if Wednesday, the 11th of February, or Sunday, the 15th of February, works.",
+          "slots": [
+            "s1",
+            "s3",
+            "s4"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D5:2",
+          "speaker": "Assistant",
+          "text": "Let me know which date works best for the trial session — Wednesday, the 11th of February, or Sunday, the 15th of February.",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user which class they want",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D5:3",
+          "speaker": "User",
+          "text": "Wednesday the 11th works for me — indoor climbing in the morning would be great.",
+          "slots": [
+            "s2",
+            "s5"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D5:4",
+          "speaker": "Assistant",
+          "text": "Great choice — Wednesday the 11th for indoor climbing in the morning. Who will be attending the trial session?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user who is coming",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D5:5",
+          "speaker": "User",
+          "text": "My friend is coming too. We're both signing up for the trial.",
+          "slots": [
+            "s6"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D5:6",
+          "speaker": "Assistant",
+          "text": "I’ll look for an indoor climbing trial session on Wednesday the 11th with you and your friend.",
+          "slots": [],
+          "act": "say briefly what you will look for, using only details the user gave",
+          "attempts": 1
+        }
+      ],
+      "llm_audit": {
+        "status": "not_ok",
+        "problems": [
+          {
+            "type": "new_identity_fact",
+            "quote": "My friend is coming too. We're both signing up for the trial.",
+            "source": "llm-audit",
+            "reason": "D5:5: Mentions a 'friend' not in profile.* or registered sources"
+          }
+        ],
+        "claims": [
+          {
+            "cid": "c1",
+            "dia_id": "D5:1",
+            "quote": "I want to find a class time that fits their week and book a trial session. Let me know if Wednesday, the 11th of February, or Sunday, the 15th of February, works.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s1_request",
+              "ctx.s3_date1",
+              "ctx.s4_date2"
+            ],
+            "reason": "Request matches ctx.s1_request, dates match ctx.s3_date1 and ctx.s4_date2"
+          },
+          {
+            "cid": "c2",
+            "dia_id": "D5:3",
+            "quote": "Wednesday the 11th works for me — indoor climbing in the morning would be great.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s3_date1",
+              "ctx.s2_class",
+              "ctx.s5_pref_schedule",
+              "pref.schedule"
+            ],
+            "reason": "Date matches ctx.s3_date1, class matches ctx.s2_class, morning preference aligns with ctx.s5_pref_schedule and pref.schedule"
+          },
+          {
+            "cid": "c3",
+            "dia_id": "D5:5",
+            "quote": "My friend is coming too. We're both signing up for the trial.",
+            "kind": "new_identity_fact",
+            "elements": [],
+            "reason": "Mentions a 'friend' not in profile.* or registered sources"
+          }
+        ]
+      }
+    },
+    {
+      "session_id": "S06",
+      "date": "2026-03-03",
+      "date_text": "3 March, 2026",
+      "activity": "grocery_delivery",
+      "errand": "reorder the usual groceries and choose a delivery slot",
+      "slots": [
+        {
+          "id": "s1",
+          "key": "request",
+          "value": "reorder the usual groceries and choose a delivery slot",
+          "say": "what you want: reorder the usual groceries and choose a delivery slot",
+          "nodes": [
+            "session:S06"
+          ],
+          "need": []
+        },
+        {
+          "id": "s2",
+          "key": "service",
+          "value": "DailyCrate",
+          "say": "the grocery service you use: DailyCrate",
+          "nodes": [
+            "fact:grocery_service"
+          ],
+          "need": [
+            "DailyCrate"
+          ]
+        },
+        {
+          "id": "s3",
+          "key": "date",
+          "value": "2026-03-07",
+          "say": "the day: Saturday, 7 March (say the weekday and the day number, e.g. 'this Saturday, the 7th')",
+          "nodes": [
+            "session:S06"
+          ],
+          "need": [
+            "\\b7(?:st|nd|rd|th)?\\b",
+            "\\b(Saturday|Sat|March|Mar)\\b"
+          ]
+        },
+        {
+          "id": "s4",
+          "key": "slot",
+          "value": "evening",
+          "say": "the delivery slot: evening",
+          "nodes": [
+            "session:S06"
+          ],
+          "need": [
+            "evening"
+          ]
+        },
+        {
+          "id": "s5",
+          "key": "items",
+          "value": [
+            "tomatoes",
+            "rice",
+            "apples",
+            "lentils",
+            "onions"
+          ],
+          "say": "your usual items: tomatoes, rice, apples, lentils, onions",
+          "nodes": [
+            "fact:usual_items"
+          ],
+          "need": [
+            "tomatoe",
+            "rice",
+            "apple",
+            "lentil",
+            "onion"
+          ]
+        },
+        {
+          "id": "s6",
+          "key": "pref_diet",
+          "value": "gluten-free",
+          "say": "your diet: gluten-free",
+          "nodes": [
+            "pref:diet"
+          ],
+          "need": [
+            "gluten"
+          ]
+        }
+      ],
+      "plan": [
+        {
+          "speaker": "User",
+          "slots": [
+            "s1",
+            "s3",
+            "s6",
+            "s4"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user which grocery service they use",
+          "asks": "s2"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "say briefly what you will look for, using only details the user gave"
+        }
+      ],
+      "turns": [
+        {
+          "dia_id": "D6:1",
+          "speaker": "User",
+          "text": "Reorder the usual groceries and pick a delivery slot for this Saturday, the 7th, in the evening. I eat gluten-free.",
+          "slots": [
+            "s1",
+            "s3",
+            "s6",
+            "s4"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D6:2",
+          "speaker": "Assistant",
+          "text": "Got it—I'll help with your gluten-free grocery reorder. Which grocery service do you use?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user which grocery service they use",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D6:3",
+          "speaker": "User",
+          "text": "I use DailyCrate. Add my usuals: tomatoes, rice, apples, lentils, and onions. Pick an evening slot for this Saturday, the 7th.",
+          "slots": [
+            "s2",
+            "s5"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D6:4",
+          "speaker": "Assistant",
+          "text": "I'll look for your usual items—tomatoes, rice, apples, lentils, and onions—and check for a Saturday, the 7th, evening delivery slot on DailyCrate.",
+          "slots": [],
+          "act": "say briefly what you will look for, using only details the user gave",
+          "attempts": 1
+        }
+      ],
+      "llm_audit": {
+        "status": "ok",
+        "problems": [],
+        "claims": [
+          {
+            "cid": "c1",
+            "dia_id": "D6:1",
+            "quote": "Reorder the usual groceries and pick a delivery slot for this Saturday, the 7th, in the evening.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s1_request",
+              "ctx.s3_date",
+              "ctx.s4_slot",
+              "ctx.s5_items"
+            ],
+            "reason": "Matches registered errand request, date, slot, and items"
+          },
+          {
+            "cid": "c2",
+            "dia_id": "D6:1",
+            "quote": "I eat gluten-free.",
+            "kind": "registered",
+            "elements": [
+              "profile.health",
+              "pref.diet"
+            ],
+            "reason": "Matches registered health condition and diet preference"
+          },
+          {
+            "cid": "c3",
+            "dia_id": "D6:3",
+            "quote": "I use DailyCrate.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s2_service"
+            ],
+            "reason": "Matches registered grocery service"
+          },
+          {
+            "cid": "c4",
+            "dia_id": "D6:3",
+            "quote": "Add my usuals: tomatoes, rice, apples, lentils, and onions.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s5_items"
+            ],
+            "reason": "Matches registered usual items"
+          },
+          {
+            "cid": "c5",
+            "dia_id": "D6:3",
+            "quote": "Pick an evening slot for this Saturday, the 7th.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s3_date",
+              "ctx.s4_slot"
+            ],
+            "reason": "Matches registered date and slot"
+          }
+        ]
+      }
+    },
+    {
+      "session_id": "S07",
+      "date": "2026-03-13",
+      "date_text": "13 March, 2026",
+      "activity": "mobile_plan_purchase",
+      "errand": "compare mobile phone plans and pick a cheaper or better one",
+      "slots": [
+        {
+          "id": "s1",
+          "key": "request",
+          "value": "compare mobile phone plans and pick a cheaper or better one",
+          "say": "what you want: compare mobile phone plans and pick a cheaper or better one",
+          "nodes": [
+            "session:S07"
+          ],
+          "need": []
+        },
+        {
+          "id": "s2",
+          "key": "carrier",
+          "value": "Northwind Mobile",
+          "say": "your current carrier: Northwind Mobile",
+          "nodes": [
+            "fact:carrier"
+          ],
+          "need": [
+            "Northwind"
+          ]
+        },
+        {
+          "id": "s3",
+          "key": "plan_data",
+          "value": "10 GB",
+          "say": "your current plan's data: 10 GB",
+          "nodes": [
+            "fact:plan_data"
+          ],
+          "need": [
+            "\\b10\\s?(GB|gig)"
+          ]
+        },
+        {
+          "id": "s4",
+          "key": "usage",
+          "value": 14,
+          "say": "how much data you use: about 14 GB a month",
+          "nodes": [
+            "fact:monthly_use_gb"
+          ],
+          "need": [
+            "\\b14\\b"
+          ]
+        },
+        {
+          "id": "s5",
+          "key": "bill",
+          "value": 65,
+          "say": "your monthly bill: about $65",
+          "nodes": [
+            "fact:monthly_bill_usd"
+          ],
+          "need": [
+            "\\b65\\b"
+          ]
+        },
+        {
+          "id": "s6",
+          "key": "count",
+          "value": 1,
+          "say": "how many lines on the plan: 1",
+          "nodes": [
+            "fact:lines"
+          ],
+          "need": [
+            "\\b1\\b|\\bone\\b|just me|by myself|alone|myself|solo|single|only me|on my own"
+          ],
+          "what": "lines on the plan"
+        },
+        {
+          "id": "s7",
+          "key": "reason",
+          "value": "calls drop at home sometimes",
+          "say": "why: calls drop at home sometimes",
+          "nodes": [
+            "session:S07"
+          ],
+          "need": [
+            "drop"
+          ]
+        }
+      ],
+      "plan": [
+        {
+          "speaker": "User",
+          "slots": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user how much data their plan has",
+          "asks": "s3"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s3",
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user how much data they use",
+          "asks": "s4"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "say briefly what you will look for, using only details the user gave"
+        }
+      ],
+      "turns": [
+        {
+          "dia_id": "D7:1",
+          "speaker": "User",
+          "text": "Hey, I want to compare mobile phone plans and pick a cheaper or better one. I'm currently with Northwind Mobile.",
+          "slots": [
+            "s1",
+            "s2"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D7:2",
+          "speaker": "Assistant",
+          "text": "Sure, I'd be happy to help you compare mobile phone plans. How much data does your current plan with Northwind Mobile include?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user how much data their plan has",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D7:3",
+          "speaker": "User",
+          "text": "My current plan has 10 GB of data and is just one line. Sometimes the calls drop at home, so I'm hoping to find something more reliable.",
+          "slots": [
+            "s3",
+            "s6",
+            "s7"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D7:4",
+          "speaker": "Assistant",
+          "text": "Got it—you have a 10 GB plan with Northwind Mobile for one line, and you're experiencing call drops at home. How much data do you typically use each month?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user how much data they use",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D7:5",
+          "speaker": "User",
+          "text": "I use about 14 GB a month, and my bill is around $65.",
+          "slots": [
+            "s4",
+            "s5"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D7:6",
+          "speaker": "Assistant",
+          "text": "I'll look for one-line plans that include at least 14 GB of data, cost around $65 or less, and offer more reliable service than Northwind Mobile.",
+          "slots": [],
+          "act": "say briefly what you will look for, using only details the user gave",
+          "attempts": 1
+        }
+      ],
+      "llm_audit": {
+        "status": "ok",
+        "problems": [],
+        "claims": [
+          {
+            "cid": "c1",
+            "dia_id": "D7:1",
+            "quote": "I want to compare mobile phone plans and pick a cheaper or better one. I'm currently with Northwind Mobile.",
+            "kind": "unregistered_detail",
+            "elements": [],
+            "reason": "Errand request and carrier mention"
+          },
+          {
+            "cid": "c2",
+            "dia_id": "D7:1",
+            "quote": "I'm currently with Northwind Mobile.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s2_carrier"
+            ],
+            "reason": "Current carrier matches registered source"
+          },
+          {
+            "cid": "c3",
+            "dia_id": "D7:3",
+            "quote": "My current plan has 10 GB of data and is just one line.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s3_plan_data",
+              "ctx.s6_count"
+            ],
+            "reason": "Plan data and line count match registered sources"
+          },
+          {
+            "cid": "c4",
+            "dia_id": "D7:3",
+            "quote": "Sometimes the calls drop at home, so I'm hoping to find something more reliable.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s7_reason"
+            ],
+            "reason": "Call drop reason matches registered source"
+          },
+          {
+            "cid": "c5",
+            "dia_id": "D7:5",
+            "quote": "I use about 14 GB a month, and my bill is around $65.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s4_usage",
+              "ctx.s5_bill"
+            ],
+            "reason": "Data usage and bill amount match registered sources"
+          }
+        ]
+      }
+    },
+    {
+      "session_id": "S08",
+      "date": "2026-04-28",
+      "date_text": "28 April, 2026",
+      "activity": "concert_ticket_booking",
+      "errand": "change the seats or date of a concert booking they are considering",
+      "slots": [
+        {
+          "id": "s1",
+          "key": "request",
+          "value": "change the seats or date of a concert booking they are considering",
+          "say": "what you want: change the seats or date of a concert booking they are considering",
+          "nodes": [
+            "session:S08"
+          ],
+          "need": []
+        },
+        {
+          "id": "s2",
+          "key": "venue",
+          "value": "Maple Yard Amphitheater",
+          "say": "the venue of the show you hold seats for: Maple Yard Amphitheater",
+          "nodes": [
+            "catalog:concerts:c5"
+          ],
+          "need": [
+            "Maple\\ Yard\\ Amphitheater"
+          ]
+        },
+        {
+          "id": "s3",
+          "key": "date_held",
+          "value": "2026-05-08",
+          "say": "the day: Friday, 8 May (say the weekday and the day number, e.g. 'Friday, the 8th of May')",
+          "nodes": [
+            "session:S08"
+          ],
+          "need": [
+            "\\b8(?:st|nd|rd|th)?\\b",
+            "\\b(Friday|Fri|May|May)\\b"
+          ]
+        },
+        {
+          "id": "s4",
+          "key": "date_wanted",
+          "value": "2026-05-17",
+          "say": "the day: Sunday, 17 May (say the weekday and the day number, e.g. 'Sunday, the 17th of May')",
+          "nodes": [
+            "session:S08"
+          ],
+          "need": [
+            "\\b17(?:st|nd|rd|th)?\\b",
+            "\\b(Sunday|Sun|May|May)\\b"
+          ]
+        },
+        {
+          "id": "s5",
+          "key": "count",
+          "value": 1,
+          "say": "how many tickets: 1",
+          "nodes": [
+            "person:self"
+          ],
+          "need": [
+            "\\b1\\b|\\bone\\b|just me|by myself|alone|myself|solo|single|only me|on my own"
+          ],
+          "what": "tickets"
+        }
+      ],
+      "plan": [
+        {
+          "speaker": "User",
+          "slots": [
+            "s1",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user which place they have in mind",
+          "asks": "s2"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "say briefly what you will look for, using only details the user gave"
+        }
+      ],
+      "turns": [
+        {
+          "dia_id": "D8:1",
+          "speaker": "User",
+          "text": "I want to change the seats or date of the concert booking I'm thinking about. I'm looking at Friday, the 8th of May or Sunday, the 17th of May.",
+          "slots": [
+            "s1",
+            "s3",
+            "s4"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D8:2",
+          "speaker": "Assistant",
+          "text": "I see—you're considering changing the seats or date of the concert booking. Do you have a specific place in mind for the new arrangement?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user which place they have in mind",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D8:3",
+          "speaker": "User",
+          "text": "I currently have a ticket for the Maple Yard Amphitheater. I'd like to change it to either Friday, the 8th or Sunday, the 17th. It's just one ticket.",
+          "slots": [
+            "s2",
+            "s5"
+          ],
+          "act": null,
+          "attempts": 2
+        },
+        {
+          "dia_id": "D8:4",
+          "speaker": "Assistant",
+          "text": "I'll look for one ticket to the concert on either Friday, the 8th of May or Sunday, the 17th of May. I'll check availability for these dates at the Maple Yard Amphitheater.",
+          "slots": [],
+          "act": "say briefly what you will look for, using only details the user gave",
+          "attempts": 1
+        }
+      ],
+      "llm_audit": {
+        "status": "ok",
+        "problems": [],
+        "claims": [
+          {
+            "cid": "c1",
+            "dia_id": "D8:1",
+            "quote": "I want to change the seats or date of the concert booking I'm thinking about",
+            "kind": "registered",
+            "elements": [
+              "ctx.s1_request"
+            ],
+            "reason": "matches the registered errand request"
+          },
+          {
+            "cid": "c2",
+            "dia_id": "D8:1",
+            "quote": "I'm looking at Friday, the 8th of May or Sunday, the 17th of May",
+            "kind": "registered",
+            "elements": [
+              "ctx.s3_date_held",
+              "ctx.s4_date_wanted"
+            ],
+            "reason": "dates match registered context"
+          },
+          {
+            "cid": "c3",
+            "dia_id": "D8:3",
+            "quote": "I currently have a ticket for the Maple Yard Amphitheater",
+            "kind": "registered",
+            "elements": [
+              "ctx.s2_venue"
+            ],
+            "reason": "venue matches registered context"
+          },
+          {
+            "cid": "c4",
+            "dia_id": "D8:3",
+            "quote": "I'd like to change it to either Friday, the 8th or Sunday, the 17th",
+            "kind": "registered",
+            "elements": [
+              "ctx.s3_date_held",
+              "ctx.s4_date_wanted"
+            ],
+            "reason": "dates match registered context"
+          },
+          {
+            "cid": "c5",
+            "dia_id": "D8:3",
+            "quote": "It's just one ticket",
+            "kind": "registered",
+            "elements": [
+              "ctx.s5_count"
+            ],
+            "reason": "ticket count matches registered context"
+          }
+        ]
+      }
+    },
+    {
+      "session_id": "S09",
+      "date": "2026-06-29",
+      "date_text": "29 June, 2026",
+      "activity": "restaurant_reservation",
+      "errand": "find a place for a weekend lunch and reserve it",
+      "slots": [
+        {
+          "id": "s1",
+          "key": "request",
+          "value": "find a place for a weekend lunch and reserve it",
+          "say": "what you want: find a place for a weekend lunch and reserve it",
+          "nodes": [
+            "session:S09"
+          ],
+          "need": []
+        },
+        {
+          "id": "s2",
+          "key": "participants",
+          "value": "friend",
+          "say": "who is coming besides you: your friend",
+          "nodes": [
+            "person:friend"
+          ],
+          "need": [
+            "\\b(friend)s?\\b"
+          ]
+        },
+        {
+          "id": "s3",
+          "key": "date",
+          "value": "2026-07-04",
+          "say": "the day: Saturday, 4 July (say the weekday and the day number, e.g. 'this Saturday, the 4th')",
+          "nodes": [
+            "session:S09"
+          ],
+          "need": [
+            "\\b4(?:st|nd|rd|th)?\\b",
+            "\\b(Saturday|Sat|July|Jul)\\b"
+          ]
+        },
+        {
+          "id": "s4",
+          "key": "time",
+          "value": "12:30",
+          "say": "the time: about 12:30 pm",
+          "nodes": [
+            "session:S09"
+          ],
+          "need": [
+            "\\b12:30\\b|\\b12\\.30\\b|half past"
+          ]
+        },
+        {
+          "id": "s5",
+          "key": "count",
+          "value": 2,
+          "say": "how many people: 2",
+          "nodes": [
+            "person:self",
+            "person:friend"
+          ],
+          "need": [
+            "\\b2\\b|\\btwo\\b|couple|both of us|the two of us|pair"
+          ],
+          "what": "people"
+        }
+      ],
+      "plan": [
+        {
+          "speaker": "User",
+          "slots": [
+            "s1",
+            "s3",
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user what time suits them",
+          "asks": "s4"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s4"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "say briefly what you will look for, using only details the user gave"
+        }
+      ],
+      "turns": [
+        {
+          "dia_id": "D9:1",
+          "speaker": "User",
+          "text": "Find a place for a weekend lunch and reserve it. My friend is coming, this Saturday, the 4th, for 2 people.",
+          "slots": [
+            "s1",
+            "s3",
+            "s2",
+            "s5"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D9:2",
+          "speaker": "Assistant",
+          "text": "Got it — you'd like to reserve a place for a weekend lunch on Saturday, the 4th, for 2 people. What time would work best for you?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user what time suits them",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D9:3",
+          "speaker": "User",
+          "text": "12:30 pm works for me. Let’s go with that.",
+          "slots": [
+            "s4"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D9:4",
+          "speaker": "Assistant",
+          "text": "I'll look for a place that's open for lunch on Saturday, the 4th, at 12:30 pm for 2 people. Let me check what's available.",
+          "slots": [],
+          "act": "say briefly what you will look for, using only details the user gave",
+          "attempts": 1
+        }
+      ],
+      "llm_audit": {
+        "status": "not_ok",
+        "problems": [
+          {
+            "type": "new_identity_fact",
+            "quote": "My friend is coming",
+            "source": "llm-audit",
+            "reason": "D9:1: friend not listed in profile"
+          }
+        ],
+        "claims": [
+          {
+            "cid": "c1",
+            "dia_id": "D9:1",
+            "quote": "Find a place for a weekend lunch and reserve it",
+            "kind": "unregistered_detail",
+            "elements": [],
+            "reason": "request for errand action"
+          },
+          {
+            "cid": "c2",
+            "dia_id": "D9:1",
+            "quote": "My friend is coming",
+            "kind": "new_identity_fact",
+            "elements": [],
+            "reason": "friend not listed in profile"
+          },
+          {
+            "cid": "c3",
+            "dia_id": "D9:1",
+            "quote": "this Saturday, the 4th",
+            "kind": "registered",
+            "elements": [
+              "ctx.s3_date"
+            ],
+            "reason": "matches registered date"
+          },
+          {
+            "cid": "c4",
+            "dia_id": "D9:1",
+            "quote": "for 2 people",
+            "kind": "registered",
+            "elements": [
+              "ctx.s5_count"
+            ],
+            "reason": "matches registered count"
+          },
+          {
+            "cid": "c5",
+            "dia_id": "D9:3",
+            "quote": "12:30 pm works for me",
+            "kind": "registered",
+            "elements": [
+              "ctx.s4_time"
+            ],
+            "reason": "matches registered time"
+          }
+        ]
+      }
+    },
+    {
+      "session_id": "S10",
+      "date": "2026-07-10",
+      "date_text": "10 July, 2026",
+      "activity": "grocery_delivery",
+      "errand": "set up this week's grocery delivery",
+      "slots": [
+        {
+          "id": "s1",
+          "key": "request",
+          "value": "set up this week's grocery delivery",
+          "say": "what you want: set up this week's grocery delivery",
+          "nodes": [
+            "session:S10"
+          ],
+          "need": []
+        },
+        {
+          "id": "s2",
+          "key": "service",
+          "value": "DailyCrate",
+          "say": "the grocery service you use: DailyCrate",
+          "nodes": [
+            "fact:grocery_service"
+          ],
+          "need": [
+            "DailyCrate"
+          ]
+        },
+        {
+          "id": "s3",
+          "key": "date",
+          "value": "2026-07-14",
+          "say": "the day: Tuesday, 14 July (say the weekday and the day number, e.g. 'this Tuesday, the 14th')",
+          "nodes": [
+            "session:S10"
+          ],
+          "need": [
+            "\\b14(?:st|nd|rd|th)?\\b",
+            "\\b(Tuesday|Tue|July|Jul)\\b"
+          ]
+        },
+        {
+          "id": "s4",
+          "key": "slot",
+          "value": "morning",
+          "say": "the delivery slot: morning",
+          "nodes": [
+            "session:S10"
+          ],
+          "need": [
+            "morning"
+          ]
+        },
+        {
+          "id": "s5",
+          "key": "count",
+          "value": 2,
+          "say": "how many people the order is for (everyone at home): 2",
+          "nodes": [
+            "fact:household_size"
+          ],
+          "need": [
+            "\\b2\\b|\\btwo\\b|couple|both of us|the two of us|pair"
+          ],
+          "what": "people the order is for"
+        }
+      ],
+      "plan": [
+        {
+          "speaker": "User",
+          "slots": [
+            "s1",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user which grocery service they use",
+          "asks": "s2"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s2",
+            "s5"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "say briefly what you will look for, using only details the user gave"
+        }
+      ],
+      "turns": [
+        {
+          "dia_id": "D10:1",
+          "speaker": "User",
+          "text": "Set up this week's grocery delivery for this Tuesday, the 14th, in the morning.",
+          "slots": [
+            "s1",
+            "s3",
+            "s4"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D10:2",
+          "speaker": "Assistant",
+          "text": "I'll help with that. Could you let me know which grocery service you use?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user which grocery service they use",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D10:3",
+          "speaker": "User",
+          "text": "I use DailyCrate. The order is for two people.",
+          "slots": [
+            "s2",
+            "s5"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D10:4",
+          "speaker": "Assistant",
+          "text": "I'll look for the details to set up your Tuesday, the 14th, morning grocery delivery for two people through DailyCrate.",
+          "slots": [],
+          "act": "say briefly what you will look for, using only details the user gave",
+          "attempts": 1
+        }
+      ],
+      "llm_audit": {
+        "status": "ok",
+        "problems": [],
+        "claims": [
+          {
+            "cid": "c1",
+            "dia_id": "D10:1",
+            "quote": "Set up this week's grocery delivery for this Tuesday, the 14th, in the morning.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s1_request",
+              "ctx.s3_date",
+              "ctx.s4_slot"
+            ],
+            "reason": "Matches registered errand request, date, and delivery slot"
+          },
+          {
+            "cid": "c2",
+            "dia_id": "D10:3",
+            "quote": "I use DailyCrate. The order is for two people.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s2_service",
+              "ctx.s5_count"
+            ],
+            "reason": "Matches registered grocery service and household count"
+          }
+        ]
+      }
+    },
+    {
+      "session_id": "S11",
+      "date": "2026-09-14",
+      "date_text": "14 September, 2026",
+      "activity": "restaurant_reservation",
+      "errand": "reserve a table for a dinner out",
+      "slots": [
+        {
+          "id": "s1",
+          "key": "request",
+          "value": "reserve a table for a dinner out",
+          "say": "what you want: reserve a table for a dinner out",
+          "nodes": [
+            "session:S11"
+          ],
+          "need": []
+        },
+        {
+          "id": "s2",
+          "key": "participants",
+          "value": "friend",
+          "say": "who is coming besides you: your friend",
+          "nodes": [
+            "person:friend"
+          ],
+          "need": [
+            "\\b(friend)s?\\b"
+          ]
+        },
+        {
+          "id": "s3",
+          "key": "date",
+          "value": "2026-09-20",
+          "say": "the day: Sunday, 20 September (say the weekday and the day number, e.g. 'this Sunday, the 20th')",
+          "nodes": [
+            "session:S11"
+          ],
+          "need": [
+            "\\b20(?:st|nd|rd|th)?\\b",
+            "\\b(Sunday|Sun|September|Sep)\\b"
+          ]
+        },
+        {
+          "id": "s4",
+          "key": "time",
+          "value": "19:00",
+          "say": "the time: about 7:00 pm",
+          "nodes": [
+            "session:S11"
+          ],
+          "need": [
+            "\\b7:00\\b|\\b7\\.00\\b|\\b7\\s?(?:pm|am|p\\.m\\.|a\\.m\\.|o'clock)|\\b7\\b"
+          ]
+        },
+        {
+          "id": "s5",
+          "key": "venue",
+          "value": "Marigold Diner",
+          "say": "the restaurant you have in mind: Marigold Diner",
+          "nodes": [
+            "catalog:restaurants:r1"
+          ],
+          "need": [
+            "Marigold\\ Diner"
+          ]
+        },
+        {
+          "id": "s6",
+          "key": "count",
+          "value": 2,
+          "say": "how many people: 2",
+          "nodes": [
+            "person:self",
+            "person:friend"
+          ],
+          "need": [
+            "\\b2\\b|\\btwo\\b|couple|both of us|the two of us|pair"
+          ],
+          "what": "people"
+        }
+      ],
+      "plan": [
+        {
+          "speaker": "User",
+          "slots": [
+            "s1",
+            "s3",
+            "s4",
+            "s2"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user how many people it is for",
+          "asks": "s6"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s6",
+            "s5"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "say briefly what you will look for, using only details the user gave"
+        }
+      ],
+      "turns": [
+        {
+          "dia_id": "D11:1",
+          "speaker": "User",
+          "text": "Hey, I want to reserve a table for dinner out on this Sunday, the 20th, around 7:00 pm. Just me and a friend.",
+          "slots": [
+            "s1",
+            "s3",
+            "s4",
+            "s2"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D11:2",
+          "speaker": "Assistant",
+          "text": "Got it—you're looking to reserve a table for dinner on Sunday, the 20th, around 7:00 pm. Just to confirm, how many people will be joining?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user how many people it is for",
+          "attempts": 3
+        },
+        {
+          "dia_id": "D11:3",
+          "speaker": "User",
+          "text": "It’s for two people at Marigold Diner. Can you reserve a table for us there?",
+          "slots": [
+            "s6",
+            "s5"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D11:4",
+          "speaker": "Assistant",
+          "text": "I’ll look for a table for two at Marigold Diner on Sunday, the 20th, around 7:00 pm.",
+          "slots": [],
+          "act": "say briefly what you will look for, using only details the user gave",
+          "attempts": 1
+        }
+      ],
+      "llm_audit": {
+        "status": "ok",
+        "problems": [],
+        "claims": [
+          {
+            "cid": "c1",
+            "dia_id": "D11:1",
+            "quote": "I want to reserve a table for dinner out on this Sunday, the 20th, around 7:00 pm. Just me and a friend.",
+            "kind": "registered",
+            "elements": [
+              "ctx.s3_date",
+              "ctx.s4_time",
+              "ctx.s2_participants",
+              "ctx.s6_count"
+            ],
+            "reason": "Date, time, participants, and count match registered sources"
+          },
+          {
+            "cid": "c2",
+            "dia_id": "D11:3",
+            "quote": "It’s for two people at Marigold Diner. Can you reserve a table for us there?",
+            "kind": "registered",
+            "elements": [
+              "ctx.s6_count",
+              "ctx.s5_venue"
+            ],
+            "reason": "Count and venue match registered sources"
+          }
+        ]
+      }
+    },
+    {
+      "session_id": "S12",
+      "date": "2026-09-27",
+      "date_text": "27 September, 2026",
+      "activity": "mobile_plan_purchase",
+      "errand": "compare mobile phone plans and pick a cheaper or better one",
+      "slots": [
+        {
+          "id": "s1",
+          "key": "request",
+          "value": "compare mobile phone plans and pick a cheaper or better one",
+          "say": "what you want: compare mobile phone plans and pick a cheaper or better one",
+          "nodes": [
+            "session:S12"
+          ],
+          "need": []
+        },
+        {
+          "id": "s2",
+          "key": "carrier",
+          "value": "Northwind Mobile",
+          "say": "your current carrier: Northwind Mobile",
+          "nodes": [
+            "fact:carrier"
+          ],
+          "need": [
+            "Northwind"
+          ]
+        },
+        {
+          "id": "s3",
+          "key": "plan_data",
+          "value": "10 GB",
+          "say": "your current plan's data: 10 GB",
+          "nodes": [
+            "fact:plan_data"
+          ],
+          "need": [
+            "\\b10\\s?(GB|gig)"
+          ]
+        },
+        {
+          "id": "s4",
+          "key": "usage",
+          "value": 14,
+          "say": "how much data you use: about 14 GB a month",
+          "nodes": [
+            "fact:monthly_use_gb"
+          ],
+          "need": [
+            "\\b14\\b"
+          ]
+        },
+        {
+          "id": "s5",
+          "key": "bill",
+          "value": 65,
+          "say": "your monthly bill: about $65",
+          "nodes": [
+            "fact:monthly_bill_usd"
+          ],
+          "need": [
+            "\\b65\\b"
+          ]
+        },
+        {
+          "id": "s6",
+          "key": "count",
+          "value": 1,
+          "say": "how many lines on the plan: 1",
+          "nodes": [
+            "fact:lines"
+          ],
+          "need": [
+            "\\b1\\b|\\bone\\b|just me|by myself|alone|myself|solo|single|only me|on my own"
+          ],
+          "what": "lines on the plan"
+        },
+        {
+          "id": "s7",
+          "key": "reason",
+          "value": "the bill went up recently",
+          "say": "why: the bill went up recently",
+          "nodes": [
+            "session:S12"
+          ],
+          "need": [
+            "bill|went up|increase|higher"
+          ]
+        }
+      ],
+      "plan": [
+        {
+          "speaker": "User",
+          "slots": [
+            "s1",
+            "s2",
+            "s6"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user how much data they use",
+          "asks": "s4"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s4",
+            "s3"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "briefly acknowledge, then ask the user why they want to change",
+          "asks": "s7"
+        },
+        {
+          "speaker": "User",
+          "slots": [
+            "s7",
+            "s5"
+          ]
+        },
+        {
+          "speaker": "Assistant",
+          "act": "say briefly what you will look for, using only details the user gave"
+        }
+      ],
+      "turns": [
+        {
+          "dia_id": "D12:1",
+          "speaker": "User",
+          "text": "I want to compare mobile phone plans and pick a cheaper or better one. I'm with Northwind Mobile and have 1 line on my plan.",
+          "slots": [
+            "s1",
+            "s2",
+            "s6"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D12:2",
+          "speaker": "Assistant",
+          "text": "Sure, let's compare some plans. How much data do you typically use each month?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user how much data they use",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D12:3",
+          "speaker": "User",
+          "text": "My current plan is 10 GB, but I use about 14 GB a month.",
+          "slots": [
+            "s4",
+            "s3"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D12:4",
+          "speaker": "Assistant",
+          "text": "Got it—you're using 14 GB a month but have a 10 GB plan. Why are you looking to change your plan?",
+          "slots": [],
+          "act": "briefly acknowledge, then ask the user why they want to change",
+          "attempts": 1
+        },
+        {
+          "dia_id": "D12:5",
+          "speaker": "User",
+          "text": "My monthly bill is about $65, and the price went up recently. I want to see if I can get a better deal.",
+          "slots": [
+            "s7",
+            "s5"
+          ],
+          "act": null,
+          "attempts": 1
+        },
+        {
+          "dia_id": "D12:6",
+          "speaker": "Assistant",
+          "text": "I’ll look for plans that offer at least 14 GB of data for a price lower than $65 a month. I’ll compare data allowances and pricing from other providers to see what might work better for you.",
+          "slots": [],
+          "act": "say briefly what you will look for, using only details the user gave",
+          "attempts": 1
+        }
+      ],
+      "llm_audit": {
+        "status": "ok",
+        "problems": [],
+        "claims": [
+          {
+            "cid": "c1",
+            "dia_id": "D12:1",
+            "quote": "I want to compare mobile phone plans and pick a cheaper or better one",
+            "kind": "registered",
+            "elements": [
+              "ctx.s1_request"
+            ],
+            "reason": "matches ctx.s1_request"
+          },
+          {
+            "cid": "c2",
+            "dia_id": "D12:1",
+            "quote": "I'm with Northwind Mobile",
+            "kind": "registered",
+            "elements": [
+              "ctx.s2_carrier"
+            ],
+            "reason": "matches ctx.s2_carrier"
+          },
+          {
+            "cid": "c3",
+            "dia_id": "D12:1",
+            "quote": "have 1 line on my plan",
+            "kind": "registered",
+            "elements": [
+              "ctx.s6_count"
+            ],
+            "reason": "matches ctx.s6_count"
+          },
+          {
+            "cid": "c4",
+            "dia_id": "D12:3",
+            "quote": "My current plan is 10 GB",
+            "kind": "registered",
+            "elements": [
+              "ctx.s3_plan_data"
+            ],
+            "reason": "matches ctx.s3_plan_data"
+          },
+          {
+            "cid": "c5",
+            "dia_id": "D12:3",
+            "quote": "I use about 14 GB a month",
+            "kind": "unregistered_detail",
+            "elements": [],
+            "reason": "ctx.s4_usage is registered but this is explicit usage detail"
+          },
+          {
+            "cid": "c6",
+            "dia_id": "D12:5",
+            "quote": "My monthly bill is about $65",
+            "kind": "registered",
+            "elements": [
+              "ctx.s5_bill"
+            ],
+            "reason": "matches ctx.s5_bill"
+          },
+          {
+            "cid": "c7",
+            "dia_id": "D12:5",
+            "quote": "the price went up recently",
+            "kind": "registered",
+            "elements": [
+              "ctx.s7_reason"
+            ],
+            "reason": "matches ctx.s7_reason"
+          },
+          {
+            "cid": "c8",
+            "dia_id": "D12:5",
+            "quote": "I want to see if I can get a better deal",
+            "kind": "unregistered_detail",
+            "elements": [],
+            "reason": "wish for better deal not in sources"
+          }
+        ]
+      }
+    }
+  ],
+  "failed": [],
+  "activities_covered": [
+    "concert_ticket_booking",
+    "fitness_class_booking",
+    "grocery_delivery",
+    "mobile_plan_purchase",
+    "restaurant_reservation",
+    "weekend_trip_booking"
+  ],
+  "status": "ok"
+}

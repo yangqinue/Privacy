@@ -1,0 +1,35 @@
+--- user ---
+A checker says the user's words contradict something registered before the conversation.
+
+Registered sources:
+- profile.age: age 28 on this date; given name Stacie; gender Female
+- profile.marital_partner: marital status Married; husband lives in the same home (name: James Clark)
+- profile.minor_children: 5-year-old son
+- profile.adult_children: none at home
+- profile.co_residents: none; 3 people live in the home in total
+- profile.job: Retail Sales Associate at Brewer-Bush Hospitality Corp; working hours not recorded
+- profile.education: Some College (Russell College)
+- profile.city: lives in Chicago, IL
+- profile.health: allergies: Pollen
+- profile.life_events: 2009-04 moved to Chicago, IL; 2015-04 started as Customer Service Representative at Reynolds-Hansen Care LLC; 2018-05 married James Clark; 2018-05 completed Some College at Russell College (Liberal Arts); 2022-10 started as Retail Sales Associate at Brewer-Bush Hospitality Corp
+- pref.schedule: enjoys late-night events
+- pref.music: music: classical, hip-hop
+- pref.hobbies: hobbies: hiking, reading, cooking
+- pref.diet: diet: lactose intolerant
+- pref.seating: no seating preference
+- ctx.s1_request: what you want: change the seats or date of a concert booking they are considering
+- ctx.s2_venue: the venue of the show you hold seats for: The Lantern Room
+- ctx.s3_date_held: the day: Friday, 12 December (say the weekday and the day number, e.g. 'Friday, the 12th of December')
+- ctx.s4_date_wanted: the day: Saturday, 20 December (say the weekday and the day number, e.g. 'Saturday, the 20th of December')
+- ctx.s5_count: how many tickets: 1
+
+User's words (D3:3): "It's just me."
+Checker's reason: States 'just me' but profile shows 3 people in household
+
+Is it impossible for the user's words and the registered sources to both be true?
+Answer "no" (compatible) when the user only offers a tentative alternative or asks a question ("maybe Saturday?"),
+gives a date without its month or year, picks another day of the same registered weekend or week, or adds a wish the
+sources say nothing about. Answer "yes" only for a real conflict: a different date, number, person, place or
+preference than the registered one, stated as what the user wants or as a fact.
+
+Reply with JSON only: {"conflict": "yes" or "no"}

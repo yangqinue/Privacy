@@ -1,0 +1,43 @@
+--- user ---
+You are checking the ASSISTANT's messages in one simulated conversation between a user and
+their personal AI assistant. Judge only what the assistant wrote. The user's messages are checked elsewhere.
+
+WHAT THE ASSISTANT WAS GIVEN (it may use this freely; it has seen nothing else and has no tools):
+- Today is Sunday, 24 May 2026.
+- The user's home city in the account settings: Dallas, TX.
+- Calendar of the coming weeks (2026): Sun 24 May, Mon 25 May, Tue 26 May, Wed 27 May, Thu 28 May, Fri 29 May, Sat 30 May; Sun 31 May, Mon 1 Jun, Tue 2 Jun, Wed 3 Jun, Thu 4 Jun, Fri 5 Jun, Sat 6 Jun; Sun 7 Jun, Mon 8 Jun, Tue 9 Jun, Wed 10 Jun, Thu 11 Jun, Fri 12 Jun, Sat 13 Jun; Sun 14 Jun, Mon 15 Jun, Tue 16 Jun, Wed 17 Jun, Thu 18 Jun, Fri 19 Jun, Sat 20 Jun; Sun 21 Jun, Mon 22 Jun, Tue 23 Jun, Wed 24 Jun, Thu 25 Jun, Fri 26 Jun, Sat 27 Jun.
+
+CONVERSATION (Sunday, 24 May 2026):
+[D13:1] User: Hey, I'm looking for upcoming concerts in town that would suit us and have seats available for Saturday, the 6th of June. Can you find ones where my friend and I can get 2 tickets?
+[D13:2] Assistant: Sure, you're looking for concerts on Saturday, June 6th with two tickets available. What kind of music are you and your friend interested in?
+[D13:3] User: We’re into R&B or jazz and would like to catch something this Saturday, the 6th, in the morning if possible.
+[D13:4] Assistant: Got it—you're looking for an R&B or jazz concert on Saturday, June 6th, in the morning with two seats available. Are you flexible with the seating location, or is there a specific area you'd prefer?
+[D13:5] User: We’d prefer aisle seats for this Saturday, the 6th.
+[D13:6] Assistant: I'll look for R&B or jazz concerts on Saturday, June 6th in the morning that have aisle seats available for two.
+
+Report a problem only when one of these clearly applies, and quote the assistant's exact words:
+- "assistant_knew_in_advance": the assistant asserts a fact ABOUT THE USER (their preference, diet, family, habit,
+  location, plan, usage) that the user has not said earlier in this conversation and that is not in what the
+  assistant was given.
+- "assistant_claims_completion": the assistant says the action itself is already done: it has booked, reserved,
+  ordered, changed, paid or confirmed with the provider.
+- "assistant_invented_listing": the assistant states as real a specific thing it could not know: a named show,
+  business, carrier, place or product that the user did not name, a price, an available time slot, a travel time or
+  distance, a phone number or address.
+- "role_swap": an assistant message is written as if the assistant were the customer (it states its own preferences
+  or needs), or a user message is written as the helper (it offers to look things up or asks the questions the
+  assistant should ask). For this type the quote may come from either speaker.
+
+These are NOT problems; do not report them:
+- saying it has noted, written down or understood something ("noted", "got it", "I'll note that");
+- saying what it will do next ("I'll look for", "I'll check", "let me check", "I can help you add", "I'll let you
+  know", "I'll confirm once", "I can proceed with that list");
+- repeating or summarising what the user said, including names and numbers the user gave;
+- asking a question, including asking for something the user could have said already;
+- offering kinds of things to consider (unlimited data, a quiet hotel, driving or taking a train, a kids' menu)
+  without presenting a specific named item, price or slot as real;
+- not knowing something, or saying it cannot do something;
+- using the date, calendar or home city it was given.
+
+Reply with JSON only:
+{"problems": [{"type": "...", "quote": "<exact words copied from the conversation>", "reason": "..."}]}

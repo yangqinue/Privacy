@@ -1,0 +1,57 @@
+--- user ---
+You are auditing the USER's messages in one simulated conversation between a user and their personal
+AI assistant. Every statement the user makes has to come from somewhere that was registered before the conversation.
+
+REGISTERED SOURCES (id: content). "profile.*" is the user's profile as of the conversation date, "pref.*" are
+registered preferences, "ctx.*" is the situation of this errand fixed before the conversation:
+- profile.age: age 29 on this date; given name Stacie; gender Female
+- profile.marital_partner: marital status Married; husband lives in the same home (name: James Clark)
+- profile.minor_children: 5-year-old son
+- profile.adult_children: none at home
+- profile.co_residents: none; 3 people live in the home in total
+- profile.job: Retail Sales Associate at Brewer-Bush Hospitality Corp; working hours not recorded
+- profile.education: Some College (Russell College)
+- profile.city: lives in Chicago, IL
+- profile.health: allergies: Pollen
+- profile.life_events: 2009-04 moved to Chicago, IL; 2015-04 started as Customer Service Representative at Reynolds-Hansen Care LLC; 2018-05 married James Clark; 2018-05 completed Some College at Russell College (Liberal Arts); 2022-10 started as Retail Sales Associate at Brewer-Bush Hospitality Corp
+- pref.schedule: enjoys late-night events
+- pref.music: music: classical, hip-hop
+- pref.hobbies: hobbies: hiking, reading, cooking
+- pref.diet: diet: lactose intolerant
+- pref.seating: no seating preference
+- ctx.s1_request: what you want: find a class time that fits their week and book a trial session
+- ctx.s2_class: the class you want to try: strength training
+- ctx.s3_date1: the day: Monday, 10 August (say the weekday and the day number, e.g. 'this Monday, the 10th')
+- ctx.s4_date2: the day: Friday, 14 August (say the weekday and the day number, e.g. 'Friday, the 14th of August')
+- ctx.s5_pref_schedule: a time preference: you enjoy late-night events
+- ctx.s6_participants: who is coming besides you: your friend
+
+USER MESSAGES (Tuesday, 4 August 2026):
+[D15:1] Hi, I want to find a strength training class time that fits on this Monday, the 10th, or Friday, the 14th of August, and book a trial session.
+[D15:3] I prefer late-night classes and my friend is coming with me.
+
+Split the user's messages into the separate things they assert or ask for (facts about themselves or other people,
+details of the errand, requirements and wishes). Skip greetings, thanks, plain questions and plain yes/no answers.
+For each one give:
+- "id": the message id, e.g. "D3:1";
+- "quote": the exact words, copied from that message;
+- "kind", one of:
+    "registered"          – it is stated in, or follows directly from, the registered sources (give their ids);
+    "unregistered_detail" – an ordinary detail or wish for this errand that is not in the registered sources
+                            (a time, an item, a feature, a place, a price limit, a seating wish);
+    "new_identity_fact"   – a fact about who the user is or about the people around them that is not in the
+                            registered sources: age, family or household members, a relative's name, job or working
+                            hours, education, a health condition or diet of the user or of a relative, or an
+                            important life event (move, marriage, divorce, birth, new job, graduation, retirement);
+    "contradiction"       – it contradicts a registered source;
+- "elements": the ids of the registered sources that support it (empty unless kind is "registered");
+- "reason": a few words.
+
+Rules: relationship words that follow from the profile are registered ("my wife", "our kids" for children of any
+age, "my parents"). A number of people that matches the registered participants or household is registered. A
+relative's first name is registered only if it appears in the sources. Asking for something because of a registered
+preference is registered. A diet or health need attributed to another person is a new_identity_fact unless it is in
+the sources. Saying a different date or number than the registered one is a contradiction.
+
+Reply with JSON only:
+{"claims": [{"id": "D3:1", "quote": "...", "kind": "...", "elements": ["..."], "reason": "..."}]}

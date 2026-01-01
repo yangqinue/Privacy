@@ -1,0 +1,37 @@
+--- user ---
+A checker says the user's words contradict something registered before the conversation.
+
+Registered sources:
+- profile.age: age 52 on this date; given name Brandon; gender Male
+- profile.marital_partner: marital status Married; wife lives in the same home (name: Cassidy Dillon)
+- profile.minor_children: none recorded
+- profile.adult_children: son aged 27, son aged 24, son aged 18, daughter aged 21
+- profile.co_residents: none; 6 people live in the home in total
+- profile.job: unknown
+- profile.education: Master (Clark University)
+- profile.city: lives in New York, NY
+- profile.health: allergies: none recorded
+- profile.life_events: 1991-06 moved to Nashville, TN; 1998-06 completed Master at Clark University (Social Work); 1998-10 married Cassidy Dillon; 2015-10 moved to New York, NY
+- pref.schedule: enjoys late-night events
+- pref.music: music: R&B, video game soundtracks
+- pref.hobbies: hobbies: reading, woodworking, rock climbing
+- pref.diet: diet: no restrictions
+- pref.seating: prefers aisle seats
+- ctx.s1_request: what you want: compare mobile phone plans and pick a cheaper or better one
+- ctx.s2_carrier: your current carrier: Juno Cellular
+- ctx.s3_plan_data: your current plan's data: 10 GB
+- ctx.s4_usage: how much data you use: about 6 GB a month
+- ctx.s5_bill: your monthly bill: about $100
+- ctx.s6_count: how many lines on the plan: 2 (you and your wife)
+- ctx.s7_reason: why: the bill went up recently
+
+User's words (D13:3): "our current plan gives us 10 GB of data each"
+Checker's reason: Registered ctx.s3_plan_data is 10 GB total, not per line
+
+Is it impossible for the user's words and the registered sources to both be true?
+Answer "no" (compatible) when the user only offers a tentative alternative or asks a question ("maybe Saturday?"),
+gives a date without its month or year, picks another day of the same registered weekend or week, or adds a wish the
+sources say nothing about. Answer "yes" only for a real conflict: a different date, number, person, place or
+preference than the registered one, stated as what the user wants or as a fact.
+
+Reply with JSON only: {"conflict": "yes" or "no"}

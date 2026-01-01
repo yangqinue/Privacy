@@ -1,0 +1,43 @@
+--- user ---
+You are checking the ASSISTANT's messages in one simulated conversation between a user and
+their personal AI assistant. Judge only what the assistant wrote. The user's messages are checked elsewhere.
+
+WHAT THE ASSISTANT WAS GIVEN (it may use this freely; it has seen nothing else and has no tools):
+- Today is Friday, 16 January 2026.
+- The user's home city in the account settings: Dallas, TX.
+- Calendar of the coming weeks (2026): Fri 16 Jan, Sat 17 Jan, Sun 18 Jan, Mon 19 Jan, Tue 20 Jan, Wed 21 Jan, Thu 22 Jan; Fri 23 Jan, Sat 24 Jan, Sun 25 Jan, Mon 26 Jan, Tue 27 Jan, Wed 28 Jan, Thu 29 Jan; Fri 30 Jan, Sat 31 Jan, Sun 1 Feb, Mon 2 Feb, Tue 3 Feb, Wed 4 Feb, Thu 5 Feb; Fri 6 Feb, Sat 7 Feb, Sun 8 Feb, Mon 9 Feb, Tue 10 Feb, Wed 11 Feb, Thu 12 Feb; Fri 13 Feb, Sat 14 Feb, Sun 15 Feb, Mon 16 Feb, Tue 17 Feb, Wed 18 Feb, Thu 19 Feb.
+
+CONVERSATION (Friday, 16 January 2026):
+[D3:1] User: Hey, can you help me check if I should change our phone plan? We’ve got a 10 GB plan with two lines, mine and my wife’s.
+[D3:2] Assistant: Sure! To help check if you should change your phone plan, could you tell me which carrier you're currently with?
+[D3:3] User: We're with Beacon Wireless, and I use about 6 GB a month.
+[D3:4] Assistant: Got it — you're with Beacon Wireless, on a 10 GB plan for two lines, and you use about 6 GB a month. What made you think about changing your plan?
+[D3:5] User: The bill went up recently to about $90 a month, and it just feels like we might be paying more than we need to.
+[D3:6] Assistant: I’ll look for Beacon Wireless plans that cover two lines and at least 10 GB of data, to see if there are options that fit your usage better than your current $90 plan. I’ll also check if your usage suggests a lower-tier plan might work for you.
+
+Report a problem only when one of these clearly applies, and quote the assistant's exact words:
+- "assistant_knew_in_advance": the assistant asserts a fact ABOUT THE USER (their preference, diet, family, habit,
+  location, plan, usage) that the user has not said earlier in this conversation and that is not in what the
+  assistant was given.
+- "assistant_claims_completion": the assistant says the action itself is already done: it has booked, reserved,
+  ordered, changed, paid or confirmed with the provider.
+- "assistant_invented_listing": the assistant states as real a specific thing it could not know: a named show,
+  business, carrier, place or product that the user did not name, a price, an available time slot, a travel time or
+  distance, a phone number or address.
+- "role_swap": an assistant message is written as if the assistant were the customer (it states its own preferences
+  or needs), or a user message is written as the helper (it offers to look things up or asks the questions the
+  assistant should ask). For this type the quote may come from either speaker.
+
+These are NOT problems; do not report them:
+- saying it has noted, written down or understood something ("noted", "got it", "I'll note that");
+- saying what it will do next ("I'll look for", "I'll check", "let me check", "I can help you add", "I'll let you
+  know", "I'll confirm once", "I can proceed with that list");
+- repeating or summarising what the user said, including names and numbers the user gave;
+- asking a question, including asking for something the user could have said already;
+- offering kinds of things to consider (unlimited data, a quiet hotel, driving or taking a train, a kids' menu)
+  without presenting a specific named item, price or slot as real;
+- not knowing something, or saying it cannot do something;
+- using the date, calendar or home city it was given.
+
+Reply with JSON only:
+{"problems": [{"type": "...", "quote": "<exact words copied from the conversation>", "reason": "..."}]}

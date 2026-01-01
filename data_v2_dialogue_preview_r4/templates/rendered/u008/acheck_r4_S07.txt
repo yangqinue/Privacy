@@ -1,0 +1,41 @@
+--- user ---
+You are checking the ASSISTANT's messages in one simulated conversation between a user and
+their personal AI assistant. Judge only what the assistant wrote. The user's messages are checked elsewhere.
+
+WHAT THE ASSISTANT WAS GIVEN (it may use this freely; it has seen nothing else and has no tools):
+- Today is Thursday, 12 February 2026.
+- The user's home city in the account settings: Chicago, IL.
+- Calendar of the coming weeks (2026): Thu 12 Feb, Fri 13 Feb, Sat 14 Feb, Sun 15 Feb, Mon 16 Feb, Tue 17 Feb, Wed 18 Feb; Thu 19 Feb, Fri 20 Feb, Sat 21 Feb, Sun 22 Feb, Mon 23 Feb, Tue 24 Feb, Wed 25 Feb; Thu 26 Feb, Fri 27 Feb, Sat 28 Feb, Sun 1 Mar, Mon 2 Mar, Tue 3 Mar, Wed 4 Mar; Thu 5 Mar, Fri 6 Mar, Sat 7 Mar, Sun 8 Mar, Mon 9 Mar, Tue 10 Mar, Wed 11 Mar; Thu 12 Mar, Fri 13 Mar, Sat 14 Mar, Sun 15 Mar, Mon 16 Mar, Tue 17 Mar, Wed 18 Mar.
+
+CONVERSATION (Thursday, 12 February 2026):
+[D7:1] User: Plan a two-night weekend trip for two people, starting on Friday, the 6th of March, and ending on Sunday, the 8th of March. Look up hotels to stay at.
+[D7:2] Assistant: Sure! Who is joining you on this trip?
+[D7:3] User: We’re going by train. My friend is coming with me.
+[D7:4] Assistant: I’ll look for weekend train travel options and hotels available from Friday, the 6th of March, to Sunday, the 8th of March, for two people.
+
+Report a problem only when one of these clearly applies, and quote the assistant's exact words:
+- "assistant_knew_in_advance": the assistant asserts a fact ABOUT THE USER (their preference, diet, family, habit,
+  location, plan, usage) that the user has not said earlier in this conversation and that is not in what the
+  assistant was given.
+- "assistant_claims_completion": the assistant says the action itself is already done: it has booked, reserved,
+  ordered, changed, paid or confirmed with the provider.
+- "assistant_invented_listing": the assistant states as real a specific thing it could not know: a named show,
+  business, carrier, place or product that the user did not name, a price, an available time slot, a travel time or
+  distance, a phone number or address.
+- "role_swap": an assistant message is written as if the assistant were the customer (it states its own preferences
+  or needs), or a user message is written as the helper (it offers to look things up or asks the questions the
+  assistant should ask). For this type the quote may come from either speaker.
+
+These are NOT problems; do not report them:
+- saying it has noted, written down or understood something ("noted", "got it", "I'll note that");
+- saying what it will do next ("I'll look for", "I'll check", "let me check", "I can help you add", "I'll let you
+  know", "I'll confirm once", "I can proceed with that list");
+- repeating or summarising what the user said, including names and numbers the user gave;
+- asking a question, including asking for something the user could have said already;
+- offering kinds of things to consider (unlimited data, a quiet hotel, driving or taking a train, a kids' menu)
+  without presenting a specific named item, price or slot as real;
+- not knowing something, or saying it cannot do something;
+- using the date, calendar or home city it was given.
+
+Reply with JSON only:
+{"problems": [{"type": "...", "quote": "<exact words copied from the conversation>", "reason": "..."}]}
