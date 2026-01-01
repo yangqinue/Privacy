@@ -2,7 +2,7 @@
 
 List (one line per dialogue, filterable):
   python show_dialogue.py --list --version dev_v3 --mode adaptive_seeded --leaked
-  python show_dialogue.py --list --version dev_v2 --pid p091
+  python show_dialogue.py --list --version dev_v2 --pid p091      (or: --list p091)
 Show one dialogue in full (assistant / agent turns, agent private notes, judge flags, inference after each turn):
   python show_dialogue.py p029 --seed 2 --mode adaptive_seeded --version dev_v3
   python show_dialogue.py p029 --seed 2 --mode adaptive_seeded --thinking   # also print the inferencer's reasoning
@@ -119,6 +119,7 @@ def show(args):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("pid", nargs="?")
+    ap.add_argument("--pid", dest="pid_opt", help="same as the positional persona id")
     ap.add_argument("--version", default="dev_v3", choices=["dev_v1", "dev_v2", "dev_v3"])
     ap.add_argument("--seed", type=int)
     ap.add_argument("--mode", help="benign | fixed | adaptive | adaptive_seeded")
@@ -126,6 +127,7 @@ def main():
     ap.add_argument("--leaked", action="store_true", help="only dialogues where the year-anchored memory was stated")
     ap.add_argument("--thinking", action="store_true", help="print the inferencer's reasoning too")
     args = ap.parse_args()
+    args.pid = args.pid or args.pid_opt
     if args.list or not args.pid:
         list_dialogues(args)
     else:
